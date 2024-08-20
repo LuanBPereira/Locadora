@@ -1,17 +1,19 @@
 package lofilmes;
 
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 
-import lofilmes.servicos.*;
+import lofilmes.servicos.CatalogoFilmes;
+import lofilmes.servicos.Consultas;
+import lofilmes.servicos.GerenciadorClientes;
+import lofilmes.servicos.HistoricoLocacoes;
 import lofilmes.utilidades.GerenciadorMenu;
 
 public class Main {
 	private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	private Scanner scan = new Scanner(System.in);
-	private CatalogoFilmes filmes = new CatalogoFilmes();
-	private HistoricoLocacoes historico = new HistoricoLocacoes();
+	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
+	private HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
 	private Consultas consultas = new Consultas();
+	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
 	
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -19,11 +21,11 @@ public class Main {
 	}
 
 	private void executar() {
-        filmes.criarFilmes();
-        historico.criarListaExemplo();
+        catalogoFilmes.criarFilmes();
+        historicoLocacoes.criarListaExemplo();
         int escolha;
         do {
-            escolha = GerenciadorMenu.mostrarMenu(scan, """
+            escolha = GerenciadorMenu.mostrarMenu("""
                             \n\t({[【﻿ＬｏＦｉｌｍｅｓ】]})
                         ---------------
                     Seja bem vindo a LoFilmes! O que desejaria?
@@ -31,20 +33,24 @@ public class Main {
                     1 - Catalogo de filmes
                     2 - Histórico locações
                     3 - Consultas
-                    4 - Encerrar programa
+                    4 - Alugar filme
+                    5 - Encerrar programa
                             """);
 
             switch (escolha) {
             case 1:
-                filmes.listarFilmes(filmes.getListaFilmes(), FORMATTER);
+                catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), FORMATTER);
                 break;
             case 2:
-                historico.exibirHistorico(FORMATTER);
+                historicoLocacoes.exibirHistorico(FORMATTER);
                 break;
             case 3:
                 entrarMenuDeConsultas();
                 break;
             case 4:
+            	gerenciadorClientes.escolherfilme(catalogoFilmes, FORMATTER, historicoLocacoes);
+            	break;
+            case 5:
                 System.out.println("Encerrando programa...");
                 break;
             default:
@@ -52,14 +58,13 @@ public class Main {
                 break;
             }
 
-        } while (escolha != 4);
-        scan.close();
+        } while (escolha != 5);
     }
 	
 	private void entrarMenuDeConsultas() {
 		int escolha;
 		do {
-			escolha = GerenciadorMenu.mostrarMenu(scan,"""
+			escolha = GerenciadorMenu.mostrarMenu("""
 							\n\t({[【﻿ＬｏＦｉｌｍｅｓ】]})
 						---------------
 					Seja bem vindo ao menu de consultas! O que desejaria?
@@ -77,28 +82,28 @@ public class Main {
 
 			switch (escolha) {
 			case 1:
-				consultas.consultarFilmePorTitulo(filmes, scan, FORMATTER);
+				consultas.consultarFilmePorTitulo(catalogoFilmes, FORMATTER);
 				break;
 			case 2:
-				consultas.consultarFilmePorDiretor(filmes, scan, FORMATTER);
+				consultas.consultarFilmePorDiretor(catalogoFilmes, FORMATTER);
 				break;
 			case 3:
-				consultas.consultarFilmePorCategoria(filmes, scan, FORMATTER);
+				consultas.consultarFilmePorCategoria(catalogoFilmes,FORMATTER);
 				break;
 			case 4:
-				consultas.consultarFilmePorPreco(filmes, scan, FORMATTER);
+				consultas.consultarFilmePorPreco(catalogoFilmes, FORMATTER);
 				break;
 			case 5:
-				consultas.consultarFilmesLocados7Dias(historico, FORMATTER);
+				consultas.consultarFilmesLocados7Dias(historicoLocacoes, FORMATTER);
 				break;
 			case 6:
-				consultas.consultarFilmeMaisLocado(historico);
+				consultas.consultarFilmeMaisLocado(historicoLocacoes);
 				break;
 			case 7:
-				consultas.consultarValorTotalLocacoesUltimoMes(historico);
+				consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);
 				break;
 			case 8:
-				consultas.consultarClienteQueMaisLocou(historico);
+				consultas.consultarClienteQueMaisLocou(historicoLocacoes);
 				break;
 			case 9:
 				return;
@@ -108,5 +113,6 @@ public class Main {
 			}
 		} while (escolha != 9);
 	}
-	
+		
+
 }

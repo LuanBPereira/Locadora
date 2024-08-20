@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class GerenciadorMenu {
 	
-	static Scanner scan = new Scanner(System.in);
+	private static Scanner scan = new Scanner(System.in);
 	
-	public static int mostrarMenu(Scanner scan, String menu) {
+	public static int mostrarMenu(String menu) {
 		int escolha = 0;
 		boolean escolhaValida = false;
 

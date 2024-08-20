@@ -29,13 +29,13 @@ public class CatalogoFilmes {
 			  
 		       System.out.printf("\n%d)\n", (i + 1));
 		       System.out.printf("Título: '%s'\nCategorias: '%s'\nDiretor: '%s'\nAtores: '%s'\nData de Lançamento: '%s'\nDuração: '%d min'\nPreço de Locação: 'R$%.2f'\n",
-		           f.titulo(), 
-		           String.join(", ", f.categorias()),
-		           f.diretor(), 
-		           String.join(", ", f.atores()), 
-		           f.dataLancamento().format(dataFormatada), 
-		           f.duracao(), 
-		           f.precoLocacao()
+		           f.getTitulo(), 
+		           String.join(", ", f.getCategorias()),
+		           f.getDiretor(), 
+		           String.join(", ", f.getAtores()), 
+		           f.getDataLancamento().format(dataFormatada), 
+		           f.getDuracao(), 
+		           f.getPrecoLocacao()
 		       );
 		}
 	}

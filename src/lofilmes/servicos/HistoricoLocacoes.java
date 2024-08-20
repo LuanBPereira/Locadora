@@ -15,6 +15,11 @@ public class HistoricoLocacoes {
 	private LocalDate dataAtual = LocalDate.of(2024, 7, 29); /* 29/7/2024 */
 	private List<DadosLocacao> listaHistorico = new ArrayList<>();
 	
+	public void salvar(Cliente cliente, double valorPago, LocalDate dataAtual, String nomeFilme,
+			int diasAlugado) {
+		listaHistorico.add(new DadosLocacao(cliente, valorPago, dataAtual, nomeFilme, diasAlugado));
+	}
+	
 	public List<DadosLocacao> getHistorico() {
 		return listaHistorico;
 	}

@@ -10,58 +10,55 @@ import lofilmes.modelos.DadosLocacao;
 import lofilmes.modelos.Filme;
 
 public class Consultas {
-
-	public void consultarFilmePorTitulo(CatalogoFilmes filmes, Scanner scan, DateTimeFormatter dataFormatada) {
-		List<Filme> filme = filmes.getListaFilmes();
+	private static Scanner scan = new Scanner(System.in);
+	
+	public void consultarFilmePorTitulo(CatalogoFilmes catalogoFilmes, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String titulo;
 
 		System.out.println("Qual filme você gostaria de procurar pelo titulo?");
 		titulo = scan.nextLine().toLowerCase();
 
-		for (Filme f : filme) {
-			if (f.titulo().toLowerCase().contains(titulo)) {
+		for (Filme f : catalogoFilmes.getListaFilmes()) {
+			if (f.getTitulo().toLowerCase().contains(titulo)) {
 				filmesEncontrados.add(f);
 			}
 		}
 
-		filmes.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorDiretor(CatalogoFilmes filmes, Scanner scan, DateTimeFormatter dataFormatada) {
-		List<Filme> filme = filmes.getListaFilmes();
+	public void consultarFilmePorDiretor(CatalogoFilmes catalogoFilmes,  DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String diretor;
 
 		System.out.println("Qual filme você gostaria de procurar pelo diretor?");
 		diretor = scan.nextLine().toLowerCase();
 
-		for (Filme f : filme) {
-			if (f.diretor().toLowerCase().contains(diretor)) {
+		for (Filme f : catalogoFilmes.getListaFilmes()) {
+			if (f.getDiretor().toLowerCase().contains(diretor)) {
 				filmesEncontrados.add(f);
 			}
 		}
-		filmes.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorCategoria(CatalogoFilmes filmes, Scanner scan, DateTimeFormatter dataFormatada) {
-		List<Filme> filme = filmes.getListaFilmes();
+	public void consultarFilmePorCategoria(CatalogoFilmes catalogoFilmes, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String categorias;
 
 		System.out.println("Qual filme você gostaria de procurar por categoria?");
 		categorias = scan.nextLine().toLowerCase();
 
-		for (Filme f : filme)
-			for (String categoria : f.categorias())
+		for (Filme f : catalogoFilmes.getListaFilmes())
+			for (String categoria : f.getCategorias())
 				if (categoria.toLowerCase().contains(categorias)) {
 					filmesEncontrados.add(f);
 				}
-		filmes.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorPreco(CatalogoFilmes filmes, Scanner scan, DateTimeFormatter dataFormatada) {
-		List<Filme> filme = filmes.getListaFilmes();
+	public void consultarFilmePorPreco(CatalogoFilmes catalogoFilmes, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		double precoMin, precoMax;
 
@@ -80,12 +77,12 @@ public class Consultas {
 
 				System.out.println("Filmes entre R$" + precoMin + " e R$" + precoMax + ":\n");
 
-				for (Filme f : filme) {
-					if (f.precoLocacao() >= precoMin && f.precoLocacao() <= precoMax) {
+				for (Filme f : catalogoFilmes.getListaFilmes()) {
+					if (f.getPrecoLocacao() >= precoMin && f.getPrecoLocacao() <= precoMax) {
 						filmesEncontrados.add(f);
 					}
 				}
-				filmes.listarFilmes(filmesEncontrados, dataFormatada);
+				catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 				break;
 			} catch (InputMismatchException e) {
 				System.err.println("Erro: Entrada inválida. Insira apenas números no preço.");
