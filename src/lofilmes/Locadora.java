@@ -1,28 +1,30 @@
 package lofilmes;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 import lofilmes.servicos.CatalogoFilmes;
 import lofilmes.servicos.Consultas;
-import lofilmes.servicos.GerenciadorClientes;
 import lofilmes.servicos.HistoricoLocacoes;
+import lofilmes.servicos.ServicosLocacao;
 import lofilmes.utilidades.GerenciadorMenu;
 
-public class Main {
+public class Locadora {
 	private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private Scanner scan = new Scanner(System.in);
+	private HistoricoLocacoes historico = new HistoricoLocacoes();
+	
 	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
-	private HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
-	private Consultas consultas = new Consultas();
-	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
+	private Consultas consultas = new Consultas(scan, historico, catalogoFilmes);
+	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, historico);
 	
 	public static void main(String[] args) {
-		Main main = new Main();
-		main.executar();
+		Locadora locadora = new Locadora();
+		locadora.executar();
 	}
 
 	private void executar() {
         catalogoFilmes.criarFilmes();
-        historicoLocacoes.criarListaExemplo();
         int escolha;
         do {
             escolha = GerenciadorMenu.mostrarMenu("""
@@ -41,14 +43,14 @@ public class Main {
             case 1:
                 catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), FORMATTER);
                 break;
-            case 2:
-                historicoLocacoes.exibirHistorico(FORMATTER);
+            case 2:    
+                consultas.consultarHistorico(FORMATTER);
                 break;
             case 3:
                 entrarMenuDeConsultas();
                 break;
             case 4:
-            	gerenciadorClientes.escolherfilme(catalogoFilmes, FORMATTER, historicoLocacoes);
+            	servicosLocacao.alugarFilme(catalogoFilmes, FORMATTER);
             	break;
             case 5:
                 System.out.println("Encerrando programa...");
@@ -82,28 +84,28 @@ public class Main {
 
 			switch (escolha) {
 			case 1:
-				consultas.consultarFilmePorTitulo(catalogoFilmes, FORMATTER);
+				consultas.consultarFilmePorTitulo(FORMATTER);
 				break;
 			case 2:
-				consultas.consultarFilmePorDiretor(catalogoFilmes, FORMATTER);
+				consultas.consultarFilmePorDiretor(FORMATTER);
 				break;
 			case 3:
-				consultas.consultarFilmePorCategoria(catalogoFilmes,FORMATTER);
+				consultas.consultarFilmePorCategoria(FORMATTER);
 				break;
 			case 4:
-				consultas.consultarFilmePorPreco(catalogoFilmes, FORMATTER);
+				consultas.consultarFilmePorPreco(FORMATTER);
 				break;
 			case 5:
-				consultas.consultarFilmesLocados7Dias(historicoLocacoes, FORMATTER);
+				consultas.consultarFilmesLocados7Dias(FORMATTER);
 				break;
 			case 6:
-				consultas.consultarFilmeMaisLocado(historicoLocacoes);
+				consultas.consultarFilmeMaisLocado();
 				break;
 			case 7:
-				consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);
+				consultas.consultarValorTotalLocacoesUltimoMes();
 				break;
 			case 8:
-				consultas.consultarClienteQueMaisLocou(historicoLocacoes);
+				consultas.consultarClienteQueMaisLocou();
 				break;
 			case 9:
 				return;
@@ -114,5 +116,4 @@ public class Main {
 		} while (escolha != 9);
 	}
 		
-
 }

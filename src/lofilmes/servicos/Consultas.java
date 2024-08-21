@@ -10,9 +10,18 @@ import lofilmes.modelos.DadosLocacao;
 import lofilmes.modelos.Filme;
 
 public class Consultas {
-	private static Scanner scan = new Scanner(System.in);
+	private CatalogoFilmes catalogoFilmes;
+	private HistoricoLocacoes historico;
+	private Scanner scan;
 	
-	public void consultarFilmePorTitulo(CatalogoFilmes catalogoFilmes, DateTimeFormatter dataFormatada) {
+	public Consultas(Scanner s, HistoricoLocacoes h, CatalogoFilmes cf) {
+		this.scan = s;
+		this.historico = h;
+		this.catalogoFilmes = cf;
+	}
+	
+	
+	public void consultarFilmePorTitulo(DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String titulo;
 
@@ -28,7 +37,7 @@ public class Consultas {
 		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorDiretor(CatalogoFilmes catalogoFilmes,  DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorDiretor(DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String diretor;
 
@@ -43,7 +52,7 @@ public class Consultas {
 		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorCategoria(CatalogoFilmes catalogoFilmes, DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorCategoria(DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String categorias;
 
@@ -58,7 +67,7 @@ public class Consultas {
 		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorPreco(CatalogoFilmes catalogoFilmes, DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorPreco(DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		double precoMin, precoMax;
 
@@ -91,7 +100,7 @@ public class Consultas {
 		}
 	}
 
-	public void consultarFilmesLocados7Dias(HistoricoLocacoes historico, DateTimeFormatter dataFormatada) {
+	public void consultarFilmesLocados7Dias(DateTimeFormatter dataFormatada) {
 		List<DadosLocacao> listaHistorico = historico.getfilmesLocados7Dias();
 		System.out.println("Filmes locados nos últimos 7 dias: ");
 		for (DadosLocacao dadosL : listaHistorico) {
@@ -99,19 +108,19 @@ public class Consultas {
 		}
 	}
 
-	public void consultarFilmeMaisLocado(HistoricoLocacoes historico) {
+	public void consultarFilmeMaisLocado() {
 		List<String> filmesMaisLocados = historico.getFilmesMaisLocados();
 		System.out.println("Filmes mais locados: ");
 		for (String filmes : filmesMaisLocados)
 			System.out.println("Filme: " + filmes);
 	}
 
-	public void consultarValorTotalLocacoesUltimoMes(HistoricoLocacoes historico) {
+	public void consultarValorTotalLocacoesUltimoMes() {
 		double valorTotalLocacoes = historico.getValorTotalLocacoesUltimoMes();
 		System.out.println("Valor total das locações do último mês: R$" + valorTotalLocacoes);
 	}
 
-	public void consultarClienteQueMaisLocou(HistoricoLocacoes historico) {
+	public void consultarClienteQueMaisLocou() {
 		List<String> clienteQueMaisLocou = historico.getClienteQueMaisLocou();
 
 		if (clienteQueMaisLocou.size() == 1) {
@@ -127,4 +136,18 @@ public class Consultas {
 		}
 	}
 
+	public void consultarHistorico(DateTimeFormatter dataFormatada) {
+		List<DadosLocacao> listaHistorico = historico.getHistorico();
+
+		if (listaHistorico.isEmpty())
+			System.out.println("Nenhum filme alugado.");
+		else
+			System.out.println("Histórico locações:\n");
+		for (DadosLocacao alugados : listaHistorico) {
+			System.out.printf("%s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n", alugados.cliente().nome(),
+					alugados.cliente().sobrenome(), alugados.tituloFilme(), alugados.valorPago(), alugados.data().format(dataFormatada),
+					alugados.diasAlugado());
+		}
+
+	}
 }
