@@ -11,63 +11,59 @@ import lofilmes.modelos.Filme;
 
 public class Consultas {
 	
-	private CatalogoFilmes catalogoFilmes;
-	private HistoricoLocacoes historico;
 	private Scanner scan;
 	
-	public Consultas(Scanner s, HistoricoLocacoes h, CatalogoFilmes cf) {
+	public Consultas(Scanner s) {
 		this.scan = s;
-		this.historico = h;
-		this.catalogoFilmes = cf;
 	}	
 	
-	public void consultarFilmePorTitulo(DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorTitulo(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String titulo;
 
 		System.out.println("Qual filme você gostaria de procurar pelo titulo?");
 		titulo = scan.nextLine().toLowerCase();
 
-		for (Filme f : catalogoFilmes.getListaFilmes()) {
+		for (Filme f : catalogo.getListaFilmes()) {
 			if (f.getTitulo().toLowerCase().contains(titulo)) {
 				filmesEncontrados.add(f);
 			}
 		}
 
-		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogo.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorDiretor(DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorDiretor(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String diretor;
 
 		System.out.println("Qual filme você gostaria de procurar pelo diretor?");
 		diretor = scan.nextLine().toLowerCase();
 
-		for (Filme f : catalogoFilmes.getListaFilmes()) {
+		for (Filme f : catalogo.getListaFilmes()) {
 			if (f.getDiretor().toLowerCase().contains(diretor)) {
 				filmesEncontrados.add(f);
 			}
 		}
-		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogo.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorCategoria(DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorCategoria(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String categorias;
 
 		System.out.println("Qual filme você gostaria de procurar por categoria?");
 		categorias = scan.nextLine().toLowerCase();
 
-		for (Filme f : catalogoFilmes.getListaFilmes())
+		for (Filme f : catalogo.getListaFilmes())
 			for (String categoria : f.getCategorias())
 				if (categoria.toLowerCase().contains(categorias)) {
 					filmesEncontrados.add(f);
 				}
-		catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogo.listarFilmes(filmesEncontrados, dataFormatada);
 	}
 
-	public void consultarFilmePorPreco(DateTimeFormatter dataFormatada) {
+	public void consultarFilmePorPreco(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		double precoMin, precoMax;
 
@@ -86,12 +82,12 @@ public class Consultas {
 
 				System.out.println("Filmes entre R$" + precoMin + " e R$" + precoMax + ":\n");
 
-				for (Filme f : catalogoFilmes.getListaFilmes()) {
+				for (Filme f : catalogo.getListaFilmes()) {
 					if (f.getPrecoLocacao() >= precoMin && f.getPrecoLocacao() <= precoMax) {
 						filmesEncontrados.add(f);
 					}
 				}
-				catalogoFilmes.listarFilmes(filmesEncontrados, dataFormatada);
+				catalogo.listarFilmes(filmesEncontrados, dataFormatada);
 				break;
 			} catch (InputMismatchException e) {
 				System.err.println("Erro: Entrada inválida. Insira apenas números no preço.");
@@ -100,7 +96,7 @@ public class Consultas {
 		}
 	}
 
-	public void consultarFilmesLocados7Dias(DateTimeFormatter dataFormatada) {
+	public void consultarFilmesLocados7Dias(HistoricoLocacoes historico, DateTimeFormatter dataFormatada) {
 		List<DadosLocacao> listaHistorico = historico.getfilmesLocados7Dias();
 		System.out.println("Filmes locados nos últimos 7 dias: \n");
 		
@@ -110,19 +106,19 @@ public class Consultas {
 		}
 	}
 
-	public void consultarFilmeMaisLocado() {
+	public void consultarFilmeMaisLocado(HistoricoLocacoes historico) {
 		List<String> filmesMaisLocados = historico.getFilmesMaisLocados();
 		System.out.println("Filmes mais locados: \n");
 		for (String filmes : filmesMaisLocados)
 			System.out.println("Filme: " + filmes);
 	}
 
-	public void consultarValorTotalLocacoesUltimoMes() {
+	public void consultarValorTotalLocacoesUltimoMes(HistoricoLocacoes historico) {
 		double valorTotalLocacoes = historico.getValorTotalLocacoesUltimoMes();
 		System.out.println("Valor total das locações do último mês: R$" + valorTotalLocacoes);
 	}
 
-	public void consultarClienteQueMaisLocou() {
+	public void consultarClienteQueMaisLocou(HistoricoLocacoes historico) {
 		List<String> clienteQueMaisLocou = historico.getClienteQueMaisLocou();
 
 		if (clienteQueMaisLocou.size() == 1) {
@@ -138,7 +134,7 @@ public class Consultas {
 		}
 	}
 
-	public void consultarHistorico(DateTimeFormatter dataFormatada) {
+	public void consultarHistorico(HistoricoLocacoes historico, DateTimeFormatter dataFormatada) {
 		List<DadosLocacao> listaHistorico = historico.getHistorico();
 
 		if (listaHistorico.isEmpty())

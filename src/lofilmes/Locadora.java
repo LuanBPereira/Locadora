@@ -15,7 +15,7 @@ public class Locadora {
 
 	private HistoricoLocacoes historico = new HistoricoLocacoes();
 	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
-	private Consultas consultas = new Consultas(scan, historico, catalogoFilmes);
+	private Consultas consultas = new Consultas(scan);
 	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, historico);
 
 	public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class Locadora {
 			catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), FORMATTER);
 			break;
 		case 2:
-			consultas.consultarHistorico(FORMATTER);
+			consultas.consultarHistorico(historico, FORMATTER);
 			break;
 		case 3:
 			entrarMenuDeConsultas();
@@ -97,28 +97,28 @@ public class Locadora {
 	private void executarEscolhaConsultas(int escolha) {
 		switch (escolha) {
 		case 1:
-			consultas.consultarFilmePorTitulo(FORMATTER);
+			consultas.consultarFilmePorTitulo(catalogoFilmes, FORMATTER);
 			break;
 		case 2:
-			consultas.consultarFilmePorDiretor(FORMATTER);
+			consultas.consultarFilmePorDiretor(catalogoFilmes, FORMATTER);
 			break;
 		case 3:
-			consultas.consultarFilmePorCategoria(FORMATTER);
+			consultas.consultarFilmePorCategoria(catalogoFilmes, FORMATTER);
 			break;
 		case 4:
-			consultas.consultarFilmePorPreco(FORMATTER);
+			consultas.consultarFilmePorPreco(catalogoFilmes, FORMATTER);
 			break;
 		case 5:
-			consultas.consultarFilmesLocados7Dias(FORMATTER);
+			consultas.consultarFilmesLocados7Dias(historico, FORMATTER);
 			break;
 		case 6:
-			consultas.consultarFilmeMaisLocado();
+			consultas.consultarFilmeMaisLocado(historico);
 			break;
 		case 7:
-			consultas.consultarValorTotalLocacoesUltimoMes();
+			consultas.consultarValorTotalLocacoesUltimoMes(historico);
 			break;
 		case 8:
-			consultas.consultarClienteQueMaisLocou();
+			consultas.consultarClienteQueMaisLocou(historico);
 			break;
 		case 9:
 			System.out.println("Retornando ao menu principal...");

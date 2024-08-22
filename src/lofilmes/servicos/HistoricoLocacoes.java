@@ -1,3 +1,4 @@
+
 package lofilmes.servicos;
 
 import java.time.LocalDate;
@@ -98,5 +99,4 @@ public class HistoricoLocacoes {
 
 	}
 	
- 	
 }
