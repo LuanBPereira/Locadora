@@ -8,17 +8,15 @@ import java.util.Map;
 
 import lofilmes.modelos.Cliente;
 import lofilmes.modelos.DadosLocacao;
+import lofilmes.modelos.Filme;
 
 public class HistoricoLocacoes {
 
-	private LocalDate dataAtual = LocalDate.of(2024, 7, 29); /* 29/7/2024 */
+	private LocalDate dataAtual = LocalDate.now(); 
 	private List<DadosLocacao> listaHistorico = new ArrayList<>();
 	
-	
-	// mudar esse método pra salvar um filme em vez de só o nome do filme!
-	public void salvar(Cliente cliente, double valorPago, LocalDate dataAtual, String nomeFilme,
-			int diasAlugado) {
-		listaHistorico.add(new DadosLocacao(cliente, valorPago, dataAtual, nomeFilme, diasAlugado));
+	public void salvar(Cliente cliente, double valorPago, LocalDate dataAtual, Filme filme, int diasAlugado) {
+		listaHistorico.add(new DadosLocacao(cliente, valorPago, dataAtual, filme, diasAlugado));
 	}
 	
 	public List<DadosLocacao> getHistorico() {
@@ -43,7 +41,7 @@ public class HistoricoLocacoes {
         int contagemMax = 0;
 
         for (DadosLocacao dadosL : listaHistorico) {
-            String titulo = dadosL.tituloFilme();
+            String titulo = dadosL.filme().getTitulo();
             int contagemAtual = contagemFilmes.getOrDefault(titulo, 0) + 1; 
             contagemFilmes.put(titulo, contagemAtual);                               
 
@@ -67,7 +65,7 @@ public class HistoricoLocacoes {
 
 		for (DadosLocacao dadosL : listaHistorico) {
 			LocalDate dataLocacao = dadosL.data();
-			if (dataLocacao.getMonthValue() == 7 && dataLocacao.getYear() == dataAtual.getYear()) {
+			if (dataLocacao.getMonthValue() == dataAtual.getMonthValue() && dataLocacao.getYear() == dataAtual.getYear()) {
 				total += dadosL.valorPago();
 			}
 		}
@@ -81,7 +79,7 @@ public class HistoricoLocacoes {
 		int contagemMax = 0;
 		
 		for (DadosLocacao dadosL : listaHistorico) {
-			String cliente = dadosL.cliente().nome() + " " + dadosL.cliente().sobrenome();
+			String cliente = dadosL.cliente().getNome() + " " + dadosL.cliente().getSobrenome();
 			int contagemAtual = contagemClientes.getOrDefault(cliente, 0) + 1;  
 			contagemClientes.put(cliente, contagemAtual);
 			

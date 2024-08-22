@@ -9,7 +9,7 @@ import lofilmes.modelos.Filme;
 
 public class CatalogoFilmes {
 	private List<Filme> filmes = new ArrayList<>();
-
+	
 	public void criarFilmes() {
 		filmes.add(new Filme("Um Sonho de Liberdade", List.of("Drama", "Crime"), "Frank Darabont", List.of("Tim Robbins", "Morgan Freeman"), data(1994, 9, 22), 142, 15.99));
 	    filmes.add(new Filme("O Poderoso Chefão", List.of("Crime", "Drama"), "Francis Ford Coppola", List.of("Marlon Brando", "Al Pacino"), data(1972, 3, 24), 175, 12.50));

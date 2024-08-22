@@ -10,6 +10,7 @@ import lofilmes.modelos.DadosLocacao;
 import lofilmes.modelos.Filme;
 
 public class Consultas {
+	
 	private CatalogoFilmes catalogoFilmes;
 	private HistoricoLocacoes historico;
 	private Scanner scan;
@@ -18,8 +19,7 @@ public class Consultas {
 		this.scan = s;
 		this.historico = h;
 		this.catalogoFilmes = cf;
-	}
-	
+	}	
 	
 	public void consultarFilmePorTitulo(DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
@@ -102,15 +102,17 @@ public class Consultas {
 
 	public void consultarFilmesLocados7Dias(DateTimeFormatter dataFormatada) {
 		List<DadosLocacao> listaHistorico = historico.getfilmesLocados7Dias();
-		System.out.println("Filmes locados nos últimos 7 dias: ");
+		System.out.println("Filmes locados nos últimos 7 dias: \n");
+		
+		
 		for (DadosLocacao dadosL : listaHistorico) {
-			System.out.println("Filme: " + dadosL.tituloFilme() + ", Data: " + dadosL.data().format(dataFormatada));
+			System.out.println("Filme: " + dadosL.filme().getTitulo() + ", Data: " + dadosL.data().format(dataFormatada));
 		}
 	}
 
 	public void consultarFilmeMaisLocado() {
 		List<String> filmesMaisLocados = historico.getFilmesMaisLocados();
-		System.out.println("Filmes mais locados: ");
+		System.out.println("Filmes mais locados: \n");
 		for (String filmes : filmesMaisLocados)
 			System.out.println("Filme: " + filmes);
 	}
@@ -144,10 +146,11 @@ public class Consultas {
 		else
 			System.out.println("Histórico locações:\n");
 		for (DadosLocacao alugados : listaHistorico) {
-			System.out.printf("%s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n", alugados.cliente().nome(),
-					alugados.cliente().sobrenome(), alugados.tituloFilme(), alugados.valorPago(), alugados.data().format(dataFormatada),
+			System.out.printf("Id: %d, %s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n", alugados.cliente().getID(), alugados.cliente().getNome(),
+					alugados.cliente().getSobrenome(), alugados.filme().getTitulo(), alugados.valorPago(), alugados.data().format(dataFormatada),
 					alugados.diasAlugado());
 		}
 
 	}
+	
 }
