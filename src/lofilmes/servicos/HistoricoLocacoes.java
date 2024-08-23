@@ -14,20 +14,20 @@ import lofilmes.modelos.Filme;
 public class HistoricoLocacoes {
 
 	private LocalDate dataAtual = LocalDate.now(); 
-	private List<DadosLocacao> listaHistorico = new ArrayList<>();
+	private List<DadosLocacao> historico = new ArrayList<>();
 	
 	public void salvar(Cliente cliente, double valorPago, LocalDate dataAtual, Filme filme, int diasAlugado) {
-		listaHistorico.add(new DadosLocacao(cliente, valorPago, dataAtual, filme, diasAlugado));
+		historico.add(new DadosLocacao(cliente, valorPago, dataAtual, filme, diasAlugado));
 	}
 	
 	public List<DadosLocacao> getHistorico() {
-		return listaHistorico;
+		return historico;
 	}
 	
 	public List<DadosLocacao> getfilmesLocados7Dias() {
         List<DadosLocacao> alugadosRecentes = new ArrayList<>();
 
-        for (DadosLocacao dadosL : listaHistorico) {
+        for (DadosLocacao dadosL : historico) {
             LocalDate dataCompra = dadosL.data();
             if (!dataCompra.isBefore(dataAtual.minusDays(7)))
                 alugadosRecentes.add(dadosL);
@@ -35,13 +35,13 @@ public class HistoricoLocacoes {
 
         return alugadosRecentes;
     }
-
+ 
 	public List<String> getFilmesMaisLocados() {
         Map<String, Integer> contagemFilmes = new HashMap<>();
         List<String> filmesMaisLocados = new ArrayList<>();
         int contagemMax = 0;
 
-        for (DadosLocacao dadosL : listaHistorico) {
+        for (DadosLocacao dadosL : historico) {
             String titulo = dadosL.filme().getTitulo();
             int contagemAtual = contagemFilmes.getOrDefault(titulo, 0) + 1; 
             contagemFilmes.put(titulo, contagemAtual);                               
@@ -64,7 +64,7 @@ public class HistoricoLocacoes {
 	public double getValorTotalLocacoesUltimoMes() {
 		double total = 0.0;
 
-		for (DadosLocacao dadosL : listaHistorico) {
+		for (DadosLocacao dadosL : historico) {
 			LocalDate dataLocacao = dadosL.data();
 			if (dataLocacao.getMonthValue() == dataAtual.getMonthValue() && dataLocacao.getYear() == dataAtual.getYear()) {
 				total += dadosL.valorPago();
@@ -72,21 +72,47 @@ public class HistoricoLocacoes {
 		}
 		return total;
 	}
-
+// ORIGINAL
+//	public List<String> getClienteQueMaisLocou() {
+//		Map<String, Integer> contagemClientes = new HashMap<>();
+//		List<String> clienteQueMaisLocou = new ArrayList<>();
+//		
+//		int contagemMax = 0;
+//		
+//		for (DadosLocacao dadosL : historico) {
+//			String cliente = dadosL.cliente().getNome() + " " + dadosL.cliente().getSobrenome();
+//			int contagemAtual = contagemClientes.getOrDefault(cliente, 0) + 1;  
+//			contagemClientes.put(cliente, contagemAtual);
+//			
+//			if (contagemAtual > contagemMax) {
+//				contagemMax = contagemAtual;
+//			}
+//		}
+//		
+//		for(Map.Entry<String, Integer> entry : contagemClientes.entrySet()) {
+//			if(entry.getValue() == contagemMax) {
+//				clienteQueMaisLocou.add(entry.getKey());
+//			}
+//		} 
+//		
+//		return clienteQueMaisLocou;
+//
+//	}
+//	
+	// TESTE
 	public List<String> getClienteQueMaisLocou() {
-		Map<String, Integer> contagemClientes = new HashMap<>();
+		Map<Long, String> contagemClientes = new HashMap<>();
 		List<String> clienteQueMaisLocou = new ArrayList<>();
 		
-		int contagemMax = 0;
 		
-		for (DadosLocacao dadosL : listaHistorico) {
-			String cliente = dadosL.cliente().getNome() + " " + dadosL.cliente().getSobrenome();
-			int contagemAtual = contagemClientes.getOrDefault(cliente, 0) + 1;  
-			contagemClientes.put(cliente, contagemAtual);
+		for (DadosLocacao dadosL : historico) {
+			Long idCliente = dadosL.cliente().getID();
+			String nomeCliente
+			String contagemCliente = contagemClientes.getOrDefault(idCliente, dadosL.cliente().getNome());  
+			contagemClientes.put(dadosL.cliente().getID(), dadosL.cliente().getNome());
 			
-			if (contagemAtual > contagemMax) {
-				contagemMax = contagemAtual;
-			}
+			
+			
 		}
 		
 		for(Map.Entry<String, Integer> entry : contagemClientes.entrySet()) {

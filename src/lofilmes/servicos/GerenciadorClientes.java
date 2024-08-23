@@ -1,79 +1,79 @@
 package lofilmes.servicos;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import lofilmes.modelos.Cliente;
 
 public class GerenciadorClientes {
 	private Scanner scan = new Scanner(System.in);
-	private Random random = new Random();
-	private final long LIMITE_ID = 100000;
-	private HashSet<Long> idsGerados = new HashSet<>();
-
-	// a verificação do nome ou sobrenome vazios, quando cai nela, tá vindo antes
-	// da linha 20. Ver como arrumar isso depois, mas a função em si tá funcionando
-	// certinho!
+	private Set<Cliente> clientes = new HashSet<>();
 
 	public Cliente criarCliente() {
 		while (true) {
-			System.out.println("Antes de continuar, digite seu nome:");
+			System.out.println("Antes de continuar, por favor, digite seu CPF");
+			Long cpf = scan.nextLong();
+			scan.nextLine();
+			
+			System.out.println("Agora, digite seu nome:");
 			String nome = scan.nextLine().trim();
 
 			System.out.println("Ótimo " + nome + ", agora seu sobrenome:");
 			String sobrenome = scan.nextLine().trim();
-
-			if (isVazio(nome, sobrenome)) {
-				continue;
-			}
-
-			Long id = gerarIdUnico();
-			return new Cliente(id, nome, sobrenome);
-		}
-	}
-
-	public Cliente criarCliente2() {
-		while (true) {
-			System.out.println("Antes de continuar, digite seu nome:");
-			String nome = scan.nextLine().trim();
-
-			System.out.println("Ótimo " + nome + ", agora seu sobrenome:");
-			String sobrenome = scan.nextLine().trim();
+			
 			try {
-				verificarSeEstaVazio(nome, sobrenome);
-
-				Long id = gerarIdUnico();
-				return new Cliente(id, nome, sobrenome);
+				verificaSeNomeSobrenomeEstaVazio(nome, sobrenome);
+				
+				Cliente novoCliente = new Cliente(cpf, nome, sobrenome);
+				verificaSeExisteClienteOuAdiciona(novoCliente);
+				
+				return novoCliente;
 			} catch (IllegalArgumentException e) {
 				System.err.println(e.getMessage());
 			}
 		}
 	}
+	
+	public Set<Cliente> getListaClientes(){
+		return clientes;
+	}
+	
+	public void listarClientes() {
+		for(Cliente c : clientes) {
+			System.out.println(c);
+		}
+	}
 
-	private void verificarSeEstaVazio(String nome, String sobrenome) {
+	private Cliente verificaSeExisteClienteOuAdiciona(Cliente novoCliente) {
+		if(clientes.contains(novoCliente)) {
+			System.out.println("Cliente com cpf " +novoCliente.getID()+ " já existe");
+			return getClienteExistente(novoCliente.getID());
+		} else {
+			adicionarClienteEmLista(novoCliente);
+			return novoCliente;
+		}
+		
+	}
+	
+	private void verificaSeNomeSobrenomeEstaVazio(String nome, String sobrenome) {
 		if (nome.isEmpty() || sobrenome.isEmpty()) {
 			throw new IllegalArgumentException("Nome e sobrenome não podem ser vazios. " + "(Nome: " + nome
 					+ ", Sobrenome: " + sobrenome + "). Tente novamente.");
 		}
 	}
 
-	private boolean isVazio(String nome, String sobrenome) {
-		if (nome.isEmpty() || sobrenome.isEmpty()) {
-			System.err.println("Nome e sobrenome não podem ser vazios. " + "(Nome: " + nome + ", Sobrenome: "
-					+ sobrenome + "). Tente novamente.");
-			return true;
+	private Cliente getClienteExistente(Long cpf) {
+		for(Cliente c : clientes) {
+			if(c.getID().equals(cpf)) {
+				return c;
+			}
 		}
-		return false;
+		return null;
 	}
-
-	private Long gerarIdUnico() {
-		Long id;
-		do {
-			id = (long) (random.nextInt((int) LIMITE_ID) + 1);
-		} while (idsGerados.contains(id));
-
-		return id;
+	
+	private void adicionarClienteEmLista(Cliente cliente) {
+		clientes.add(cliente);
 	}
-
+	
 }
