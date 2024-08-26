@@ -26,7 +26,7 @@ public class GerenciadorClientes {
 				verificaSeNomeSobrenomeEstaVazio(nome, sobrenome);
 				
 				Cliente novoCliente = new Cliente(cpf, nome, sobrenome);
-				verificaSeExisteClienteOuAdiciona(novoCliente);
+				novoCliente = verificaSeExisteClienteOuAdiciona(novoCliente);
 				
 				return novoCliente;
 			} catch (IllegalArgumentException e) {
@@ -38,17 +38,11 @@ public class GerenciadorClientes {
 	public Set<Cliente> getListaClientes(){
 		return clientes;
 	}
-	
-	public void listarClientes() {
-		for(Cliente c : clientes) {
-			System.out.println(c);
-		}
-	}
 
 	private Cliente verificaSeExisteClienteOuAdiciona(Cliente novoCliente) {
-		if(clientes.contains(novoCliente)) {
-			System.out.println("Cliente com cpf " +novoCliente.getID()+ " já existe");
-			return getClienteExistente(novoCliente.getID());
+		if (clientes.contains(novoCliente)) {
+			System.out.println("Cliente com CPF " + novoCliente.getCPF() + " já existe.");
+			return getClienteExistente(novoCliente.getCPF());
 		} else {
 			adicionarClienteEmLista(novoCliente);
 			return novoCliente;
@@ -65,7 +59,7 @@ public class GerenciadorClientes {
 
 	private Cliente getClienteExistente(Long cpf) {
 		for(Cliente c : clientes) {
-			if(c.getID().equals(cpf)) {
+			if(c.getCPF().equals(cpf)) {
 				return c;
 			}
 		}
@@ -75,5 +69,5 @@ public class GerenciadorClientes {
 	private void adicionarClienteEmLista(Cliente cliente) {
 		clientes.add(cliente);
 	}
-	
+
 }

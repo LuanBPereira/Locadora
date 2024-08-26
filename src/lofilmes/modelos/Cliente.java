@@ -7,27 +7,22 @@ public class Cliente {
 	private String nome;
 	private String sobrenome;
 	
-	public Cliente(Long iD, String nome, String sobrenome) {
-		CPF = iD;
+	public Cliente(Long cpf, String nome, String sobrenome) {
+		CPF = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 	}
 	
-	public Long getID() {
+	public Long getCPF() {
 		return CPF;
 	}
 	
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	public String getSobrenome() {
 		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
 	}
 
 	@Override
@@ -45,7 +40,7 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return "Id: " + CPF + "\nnome: " + nome + "\nsobrenome: " + sobrenome;
+		return "Cpf: " + CPF + "\nnome: " + nome + "\nsobrenome: " + sobrenome;
 	}
 
 	

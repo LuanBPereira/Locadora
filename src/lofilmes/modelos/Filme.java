@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Filme {
-	String titulo;
-	List<String> categorias;
-	String diretor;
-	List<String> atores;
-	LocalDate dataLancamento;
-	int duracao;
-	double precoLocacao;
+	private String titulo;
+	private List<String> categorias;
+	private String diretor;
+	private List<String> atores;
+	private LocalDate dataLancamento;
+	private int duracao;
+	private double precoLocacao;
 	
 	public Filme(String titulo, List<String> categorias, String diretor,
 			List<String> atores, LocalDate dataLancamento, int duracao, double precoLocacao) {
@@ -27,56 +27,28 @@ public class Filme {
 		return titulo;
 	}
 	
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	
 	public List<String> getCategorias() {
 		return categorias;
-	}
-	
-	public void setCategorias(List<String> categorias) {
-		this.categorias = categorias;
 	}
 	
 	public String getDiretor() {
 		return diretor;
 	}
-	
-	public void setDiretor(String diretor) {
-		this.diretor = diretor;
-	}
-	
+
 	public List<String> getAtores() {
 		return atores;
 	}
-	
-	public void setAtores(List<String> atores) {
-		this.atores = atores;
-	}
-	
+
 	public LocalDate getDataLancamento() {
 		return dataLancamento;
-	}
-	
-	public void setDataLancamento(LocalDate dataLancamento) {
-		this.dataLancamento = dataLancamento;
 	}
 	
 	public int getDuracao() {
 		return duracao;
 	}
 	
-	public void setDuracao(int duracao) {
-		this.duracao = duracao;
-	}
-	
 	public double getPrecoLocacao() {
 		return precoLocacao;
-	}
-	
-	public void setPrecoLocacao(double precoLocacao) {
-		this.precoLocacao = precoLocacao;
 	}
 	
 }

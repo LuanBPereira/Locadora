@@ -3,10 +3,7 @@ package lofilmes;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import lofilmes.servicos.CatalogoFilmes;
-import lofilmes.servicos.Consultas;
-import lofilmes.servicos.HistoricoLocacoes;
-import lofilmes.servicos.ServicosLocacao;
+import lofilmes.servicos.*;
 import lofilmes.utilidades.GerenciadorMenu;
 
 public class Locadora {
@@ -57,7 +54,7 @@ public class Locadora {
 			entrarMenuDeConsultas();
 			break;
 		case 4:
-			servicosLocacao.alugarFilme(catalogoFilmes, FORMATTER);
+			servicosLocacao.alugarFilme(catalogoFilmes);
 			break;
 		case 5:
 			System.out.println("Encerrando programa...");
