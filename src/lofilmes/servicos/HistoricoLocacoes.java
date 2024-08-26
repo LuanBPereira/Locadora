@@ -13,7 +13,6 @@ import lofilmes.modelos.Filme;
 
 public class HistoricoLocacoes {
 
-
 	private List<DadosLocacao> historico = new ArrayList<>();
 	
 	public void salvar(Cliente cliente, double valorPago, LocalDate data, Filme filme, int diasAlugado) {
@@ -105,5 +104,6 @@ public class HistoricoLocacoes {
 
 		return clienteQueMaisLocou;
 	}
+	
 
 }
