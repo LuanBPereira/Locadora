@@ -40,13 +40,15 @@ public class GerenciadorClientes {
 		}
 	}
 
-	public Map<Long, Cliente> getListaClientes() {
-		return listaClientes;
-	}
-
 	public void listarCLientes() {
-		for (Cliente cliente : listaClientes.values()) {
-			System.out.println(cliente);
+		System.out.println("Listando clientes");
+
+		if(listaClientes.isEmpty()){
+			System.out.println("Lista de clientes vazia.");
+		} else {
+			for (Cliente cliente : listaClientes.values()) {
+				System.out.println(cliente);
+			}
 		}
 	}
 

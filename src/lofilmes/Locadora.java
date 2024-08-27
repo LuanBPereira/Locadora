@@ -10,10 +10,11 @@ public class Locadora {
 	private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private Scanner scan = new Scanner(System.in);
 
-	private HistoricoLocacoes historico = new HistoricoLocacoes();
+	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
+	private HistoricoLocacoes historico = new HistoricoLocacoes(gerenciadorClientes);
 	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
 	private Consultas consultas = new Consultas(scan);
-	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, historico);
+	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gerenciadorClientes, historico);
 
 	public static void main(String[] args) {
 		new Locadora().executar();
@@ -25,7 +26,8 @@ public class Locadora {
 		do {
 			escolha = exibirMenuPrincipal();
 			executarEscolhaPrincipal(escolha);
-		} while (escolha != 5);
+		} while (escolha != 6);
+		scan.close();
 	}
 
 	private int exibirMenuPrincipal() {
@@ -38,28 +40,32 @@ public class Locadora {
 				2 - Histórico locações
 				3 - Consultas
 				4 - Alugar filme
-				5 - Encerrar programa
+				5 - Listar clientes
+				6 - Encerrar programa
 				""");
 	}
 
 	private void executarEscolhaPrincipal(int escolha) {
 		switch (escolha) {
-		case 1:
-			catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), FORMATTER);
-			break;
-		case 2:
-			consultas.consultarHistorico(historico, FORMATTER);
-			break;
-		case 3:
-			entrarMenuDeConsultas();
-			break;
-		case 4:
-			servicosLocacao.alugarFilme(catalogoFilmes);
-			break;
-		case 5:
-			System.out.println("Encerrando programa...");
-			break;
-		default:
+			case 1:
+				catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), FORMATTER);
+				break;
+			case 2:
+				consultas.consultarHistorico(historico, FORMATTER);
+				break;
+			case 3:
+				entrarMenuDeConsultas();
+				break;
+			case 4:
+				servicosLocacao.alugarFilme(catalogoFilmes);
+				break;
+			case 5:
+				gerenciadorClientes.listarCLientes();
+				break;
+			case 6:
+				System.out.println("Encerrando programa...");
+				break;
+			default:
 			System.err.println("Opção não disponível.");
 			break;
 		}
@@ -93,36 +99,36 @@ public class Locadora {
 
 	private void executarEscolhaConsultas(int escolha) {
 		switch (escolha) {
-		case 1:
-			consultas.consultarFilmePorTitulo(catalogoFilmes, FORMATTER);
-			break;
-		case 2:
-			consultas.consultarFilmePorDiretor(catalogoFilmes, FORMATTER);
-			break;
-		case 3:
-			consultas.consultarFilmePorCategoria(catalogoFilmes, FORMATTER);
-			break;
-		case 4:
-			consultas.consultarFilmePorPreco(catalogoFilmes, FORMATTER);
-			break;
-		case 5:
-			consultas.consultarFilmesLocados7Dias(historico, FORMATTER);
-			break;
-		case 6:
-			consultas.consultarFilmeMaisLocado(historico);
-			break;
-		case 7:
-			consultas.consultarValorTotalLocacoesUltimoMes(historico);
-			break;
-		case 8:
-			consultas.consultarClienteQueMaisLocou(historico);
-			break;
-		case 9:
-			System.out.println("Retornando ao menu principal...");
-			break;
-		default:
-			System.err.println("Opção não disponível.");
-			break;
+			case 1:
+				consultas.consultarFilmePorTitulo(catalogoFilmes, FORMATTER);
+				break;
+			case 2:
+				consultas.consultarFilmePorDiretor(catalogoFilmes, FORMATTER);
+				break;
+			case 3:
+				consultas.consultarFilmePorCategoria(catalogoFilmes, FORMATTER);
+				break;
+			case 4:
+				consultas.consultarFilmePorPreco(catalogoFilmes, FORMATTER);
+				break;
+			case 5:
+				consultas.consultarFilmesLocados7Dias(historico, FORMATTER);
+				break;
+			case 6:
+				consultas.consultarFilmeMaisLocado(historico);
+				break;
+			case 7:
+				consultas.consultarValorTotalLocacoesUltimoMes(historico);
+				break;
+			case 8:
+				consultas.consultarClienteQueMaisLocou(historico);
+				break;
+			case 9:
+				System.out.println("Retornando ao menu principal...");
+				break;
+			default:
+				System.err.println("Opção não disponível.");
+				break;
 		}
 	}
 

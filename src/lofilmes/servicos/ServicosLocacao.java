@@ -9,13 +9,14 @@ import lofilmes.modelos.Cliente;
 import lofilmes.modelos.Filme;
 
 public class ServicosLocacao {
-	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
+	private GerenciadorClientes gerenciadorClientes;
 	private HistoricoLocacoes historicoLocacoes;
 	private Scanner scan;
 
-	public ServicosLocacao(Scanner s, HistoricoLocacoes h) {
+	public ServicosLocacao(Scanner s, GerenciadorClientes gc, HistoricoLocacoes hl) {
 		this.scan = s;
-		this.historicoLocacoes = h;
+		this.gerenciadorClientes = gc;
+		this.historicoLocacoes = hl;
 	}
 
 	public void alugarFilme(CatalogoFilmes catalogo) {
@@ -23,9 +24,7 @@ public class ServicosLocacao {
 		LocalDate data = LocalDate.now();
 
 		Cliente cliente = gerenciadorClientes.criarCliente();
-
-		// usei apenas pra ver se tá criando clientes repetidos (log)
-		System.out.println(gerenciadorClientes.getListaClientes());
+		System.out.println("Cliente cadastrado/recuperado: " + cliente);
 
 		int opcaoFilme = getOpcaoFilme(listaFilmes);
 		int diasAlugado = getDiasAlugado();
@@ -71,12 +70,12 @@ public class ServicosLocacao {
 				return diasAlugado;
 			} catch (InputMismatchException e) {
 				System.err.println("Entrada inválida. Por favor, insira um número.");
-				scan.nextLine();
+				scan.nextLine(); // Limpa a entrada inválida
 			}
 		}
 	}
 
-	private double getPrecoTotal(double precoLocacao, double diasAlugados){
+	private double getPrecoTotal(double precoLocacao, int diasAlugados) {
 		return precoLocacao * diasAlugados;
 	}
 
@@ -87,5 +86,4 @@ public class ServicosLocacao {
 	private boolean isFilmeValido(int opcaoFilme, int tamanhoLista) {
 		return opcaoFilme > 0 && opcaoFilme <= tamanhoLista;
 	}
-
 }

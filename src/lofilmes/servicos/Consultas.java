@@ -10,18 +10,18 @@ import lofilmes.modelos.DadosLocacao;
 import lofilmes.modelos.Filme;
 
 public class Consultas {
-	
+
 	private Scanner scan;
-	
+
 	public Consultas(Scanner s) {
 		this.scan = s;
-	}	
-	
+	}
+
 	public void consultarFilmePorTitulo(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
 		List<Filme> filmesEncontrados = new ArrayList<>();
 		String titulo;
 
-		System.out.println("Qual filme você gostaria de procurar pelo titulo?");
+		System.out.println("Qual filme você gostaria de procurar pelo título?");
 		titulo = scan.nextLine().toLowerCase();
 
 		for (Filme f : catalogo.getListaFilmes()) {
@@ -97,10 +97,9 @@ public class Consultas {
 	}
 
 	public void consultarFilmesLocados7Dias(HistoricoLocacoes historico, DateTimeFormatter dataFormatada) {
-		List<DadosLocacao> listaHistorico = historico.getfilmesLocados7Dias();
+		List<DadosLocacao> listaHistorico = historico.getFilmesLocadosNosUltimos7Dias();
 		System.out.println("Filmes locados nos últimos 7 dias: \n");
-		
-		
+
 		for (DadosLocacao dadosL : listaHistorico) {
 			System.out.println("Filme: " + dadosL.filme().getTitulo() + ", Data: " + dadosL.data().format(dataFormatada));
 		}
@@ -125,9 +124,8 @@ public class Consultas {
 			for (String cliente : clienteQueMaisLocou) {
 				System.out.println("Cliente que mais locou: " + cliente);
 			}
-
-		} else if (clienteQueMaisLocou.size() > 1) {
-			System.out.println("Clientes que mais locaram: ");
+		} else {
+			System.out.println("Clientes que mais locaram:");
 			for (String cliente : clienteQueMaisLocou) {
 				System.out.println("Cliente: " + cliente);
 			}
@@ -140,13 +138,17 @@ public class Consultas {
 		if (listaHistorico.isEmpty())
 			System.out.println("Nenhum filme alugado.");
 		else
-			System.out.println("Histórico locações:\n");
+			System.out.println("Histórico de locações:\n");
 		for (DadosLocacao alugados : listaHistorico) {
-			System.out.printf("Cpf: %d, %s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n", alugados.cliente().getCPF(), alugados.cliente().getNome(),
-					alugados.cliente().getSobrenome(), alugados.filme().getTitulo(), alugados.valorPago(), alugados.data().format(dataFormatada),
+			System.out.printf("CPF: %d, %s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n",
+					alugados.cliente().getCPF(),
+					alugados.cliente().getNome(),
+					alugados.cliente().getSobrenome(),
+					alugados.filme().getTitulo(),
+					alugados.valorPago(),
+					alugados.data().format(dataFormatada),
 					alugados.diasAlugado());
 		}
-
 	}
-	
+
 }
