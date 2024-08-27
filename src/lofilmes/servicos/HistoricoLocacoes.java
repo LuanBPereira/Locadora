@@ -13,11 +13,6 @@ import lofilmes.modelos.Filme;
 public class HistoricoLocacoes {
 
 	private List<DadosLocacao> historico = new ArrayList<>();
-	private GerenciadorClientes gerenciadorClientes; // Adiciona a referência ao GerenciadorClientes
-
-	public HistoricoLocacoes(GerenciadorClientes gerenciadorClientes) {
-		this.gerenciadorClientes = gerenciadorClientes;
-	}
 
 	public void salvar(Cliente cliente, double valorPago, LocalDate data, Filme filme, int diasAlugado) {
 		historico.add(new DadosLocacao(cliente, valorPago, data, filme, diasAlugado));
@@ -57,8 +52,12 @@ public class HistoricoLocacoes {
 		}
 
 		for (Map.Entry<String, Integer> entry : contagemFilmes.entrySet()) {
-			if (entry.getValue() == contagemMax) {
-				filmesMaisLocados.add(entry.getKey());
+			// referencia da Nicolli pq achei muito legal o/
+			String filme = entry.getKey();
+			int contagem = entry.getValue();
+			
+			if (contagem == contagemMax) {
+				filmesMaisLocados.add(filme);
 			}
 		}
 
@@ -79,33 +78,37 @@ public class HistoricoLocacoes {
 		return total;
 	}
 
-	public List<String> getClienteQueMaisLocou() {
-		Map<Long, Integer> contagemLocacaoCliente = new HashMap<>();
-		List<String> clienteQueMaisLocou = new ArrayList<>();
-		int contagemMax = 0;
+	public List<String> getClienteQueMaisLocou(GerenciadorClientes gerenciadorClientes) {
+	    Map<Long, Integer> contagemLocacaoCliente = new HashMap<>();
+	    List<String> clienteQueMaisLocou = new ArrayList<>();
+	    int contagemMax = 0;
 
-		for (DadosLocacao dadosL : historico) {
-			Long cpfCliente = dadosL.cliente().getCPF();
-			int contagemAtual = contagemLocacaoCliente.getOrDefault(cpfCliente, 0) + 1;
-			contagemLocacaoCliente.put(cpfCliente, contagemAtual);
+	    // contagem de locações por cliente
+	    for (DadosLocacao dadosL : historico) {
+	        Long cpfCliente = dadosL.cliente().getCPF();
+	        int contagemAtual = contagemLocacaoCliente.getOrDefault(cpfCliente, 0) + 1;
+	        contagemLocacaoCliente.put(cpfCliente, contagemAtual);
 
-			if (contagemAtual > contagemMax) {
-				contagemMax = contagemAtual;
-			}
-		}
+	        if(contagemAtual > contagemMax) {
+	        	contagemMax = contagemAtual;
+	        }
+	    }
 
-		for (Long cpf : contagemLocacaoCliente.keySet()) {
-			if (contagemLocacaoCliente.get(cpf) == contagemMax) {
-				Cliente cliente = gerenciadorClientes.getClientePorCpf(cpf);
-				if (cliente != null) {
-					String nomeCliente = cliente.getNome() + " " + cliente.getSobrenome();
-					if (!clienteQueMaisLocou.contains(nomeCliente)) {
-						clienteQueMaisLocou.add(nomeCliente);
-					}
-				}
-			}
-		}
+	    // identificar o(s) cliente(s) que mais locaram
+	    for (Map.Entry<Long, Integer> entry : contagemLocacaoCliente.entrySet()) {
+	        Long cpf = entry.getKey();
+	        int contagem = entry.getValue();
+	        
+	        if (contagem == contagemMax) {
+	            Cliente cliente = gerenciadorClientes.getClientePorCpf(cpf);
+	            if (cliente != null) {
+	                String nomeCompleto = cliente.getNomeCompleto();
+	                clienteQueMaisLocou.add(nomeCompleto);
+	            }
+	        }
+	    }
 
-		return clienteQueMaisLocou;
+	    return clienteQueMaisLocou;
 	}
+	
 }

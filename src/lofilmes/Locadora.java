@@ -11,7 +11,7 @@ public class Locadora {
 	private Scanner scan = new Scanner(System.in);
 
 	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
-	private HistoricoLocacoes historico = new HistoricoLocacoes(gerenciadorClientes);
+	private HistoricoLocacoes historico = new HistoricoLocacoes();
 	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
 	private Consultas consultas = new Consultas(scan);
 	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gerenciadorClientes, historico);
@@ -121,7 +121,7 @@ public class Locadora {
 				consultas.consultarValorTotalLocacoesUltimoMes(historico);
 				break;
 			case 8:
-				consultas.consultarClienteQueMaisLocou(historico);
+				consultas.consultarClienteQueMaisLocou(historico, gerenciadorClientes);
 				break;
 			case 9:
 				System.out.println("Retornando ao menu principal...");

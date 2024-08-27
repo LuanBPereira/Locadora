@@ -25,6 +25,10 @@ public class Cliente {
 		return sobrenome;
 	}
 
+	public String getNomeCompleto() {
+		return nome + " " + sobrenome;
+	}
+	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
