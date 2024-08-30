@@ -13,12 +13,13 @@ import lofilmes.utilidades.GerenciadorMenu;
 public class Locadora {
 	private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private Scanner scan = new Scanner(System.in);
-
+	
+	private GerenciadorMenu gerenciadorMenu = new GerenciadorMenu(scan);
 	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
-	private HistoricoLocacoes historico = new HistoricoLocacoes();
+	private HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
 	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
 	private Consultas consultas = new Consultas(scan);
-	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gerenciadorClientes, historico);
+	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gerenciadorClientes, historicoLocacoes);
 	
 	public void executarLocadora() {
 		entrarMenuPrincipal();
@@ -35,7 +36,7 @@ public class Locadora {
 	}
 
 	private int exibirMenuPrincipal() {
-		return GerenciadorMenu.mostrarMenu("""
+		return gerenciadorMenu.mostrarMenu("""
 				\n\t({[【﻿ＬｏＦｉｌｍｅｓ】]})
 				---------------
 				Seja bem vindo a LoFilmes! O que desejaria?
@@ -52,10 +53,10 @@ public class Locadora {
 	private void executarEscolhaPrincipal(int escolha) {
 		switch (escolha) {
 			case 1:
-				catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), FORMATTER);
+				catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes() ,FORMATTER);
 				break;
 			case 2:
-				consultas.consultarHistorico(historico, FORMATTER);
+				consultas.consultarHistorico(historicoLocacoes, FORMATTER);
 				break;
 			case 3:
 				entrarMenuDeConsultas();
@@ -84,7 +85,7 @@ public class Locadora {
 	}
 
 	private int exibirMenuConsultas() {
-		return GerenciadorMenu.mostrarMenu("""
+		return gerenciadorMenu.mostrarMenu("""
 				\n\t({[【﻿ＬｏＦｉｌｍｅｓ】]})
 				---------------
 				Seja bem vindo ao menu de consultas! O que desejaria?
@@ -116,16 +117,16 @@ public class Locadora {
 				consultas.consultarFilmePorPreco(catalogoFilmes, FORMATTER);
 				break;
 			case 5:
-				consultas.consultarFilmesLocados7Dias(historico, FORMATTER);
+				consultas.consultarFilmesLocados7Dias(historicoLocacoes, FORMATTER);
 				break;
 			case 6:
-				consultas.consultarFilmeMaisLocado(historico);
+				consultas.consultarFilmeMaisLocado(historicoLocacoes);
 				break;
 			case 7:
-				consultas.consultarValorTotalLocacoesUltimoMes(historico);
+				consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);
 				break;
 			case 8:
-				consultas.consultarClienteQueMaisLocou(historico, gerenciadorClientes);
+				consultas.consultarClienteQueMaisLocou(historicoLocacoes, gerenciadorClientes);
 				break;
 			case 9:
 				System.out.println("Retornando ao menu principal...");
