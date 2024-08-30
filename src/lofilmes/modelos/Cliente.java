@@ -44,7 +44,7 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return "Cpf: " + CPF + "\nnome: " + nome + "\nsobrenome: " + sobrenome;
+		return "Cpf: " + CPF + "Cliente: " + getNomeCompleto();
 	}
 
 	
