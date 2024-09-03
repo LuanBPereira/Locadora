@@ -52,7 +52,6 @@ public class HistoricoLocacoes {
 		}
 
 		for (Map.Entry<String, Integer> entry : contagemFilmes.entrySet()) {
-			// referencia da Nicolli pq achei muito legal o/
 			String filme = entry.getKey();
 			int contagem = entry.getValue();
 			
@@ -85,9 +84,9 @@ public class HistoricoLocacoes {
 
 	    // contagem de locações por cliente
 	    for (DadosLocacao dadosL : historico) {
-	        Long cpfCliente = dadosL.cliente().getCPF();
-	        int contagemAtual = contagemLocacaoCliente.getOrDefault(cpfCliente, 0) + 1;
-	        contagemLocacaoCliente.put(cpfCliente, contagemAtual);
+	        Long idCliente = dadosL.cliente().getID();
+	        int contagemAtual = contagemLocacaoCliente.getOrDefault(idCliente, 0) + 1;
+	        contagemLocacaoCliente.put(idCliente, contagemAtual);
 
 	        if(contagemAtual > contagemMax) {
 	        	contagemMax = contagemAtual;
@@ -96,11 +95,11 @@ public class HistoricoLocacoes {
 
 	    // identificar o(s) cliente(s) que mais locaram
 	    for (Map.Entry<Long, Integer> entry : contagemLocacaoCliente.entrySet()) {
-	        Long cpf = entry.getKey();
+	        Long id = entry.getKey();
 	        int contagem = entry.getValue();
 	        
 	        if (contagem == contagemMax) {
-	            Cliente cliente = gerenciadorClientes.getClientePorCpf(cpf);
+	            Cliente cliente = gerenciadorClientes.getClientePorId(id);
 	            if (cliente != null) {
 	                String nomeCompleto = cliente.getNomeCompleto();
 	                clienteQueMaisLocou.add(nomeCompleto);

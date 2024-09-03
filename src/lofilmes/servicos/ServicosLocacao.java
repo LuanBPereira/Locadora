@@ -70,7 +70,7 @@ public class ServicosLocacao {
 				return diasAlugado;
 			} catch (InputMismatchException e) {
 				System.err.println("Entrada inválida. Por favor, insira um número.");
-				scan.nextLine(); // Limpa a entrada inválida
+				scan.nextLine();
 			}
 		}
 	}

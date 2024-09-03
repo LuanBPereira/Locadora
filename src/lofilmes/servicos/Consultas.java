@@ -140,7 +140,7 @@ public class Consultas {
 		else
 			System.out.println("Histórico de locações:\n");
 		for (DadosLocacao alugados : listaHistorico) {
-			System.out.printf("CPF: %d, %s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n",
+			System.out.printf("CPF: %s, %s %s, %s, R$%.2f, %s, Dias alugados: %d%n%n",
 					alugados.cliente().getCPF(),
 					alugados.cliente().getNome(),
 					alugados.cliente().getSobrenome(),
