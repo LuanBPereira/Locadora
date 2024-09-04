@@ -24,7 +24,6 @@ public class ServicosLocacao {
 		LocalDate data = LocalDate.now();
 
 		Cliente cliente = gerenciadorClientes.criarCliente();
-		System.out.println("Cliente cadastrado/recuperado: " + cliente);
 
 		int opcaoFilme = getOpcaoFilme(listaFilmes);
 		int diasAlugado = getDiasAlugado();

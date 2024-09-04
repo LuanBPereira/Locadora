@@ -6,10 +6,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import lofilmes.modelos.Cliente;
+import lofilmes.utilidades.Formatador;
 
 public class GerenciadorClientes {
 	private Scanner scan = new Scanner(System.in);
@@ -24,9 +23,14 @@ public class GerenciadorClientes {
 			cpf = criarCpf();
 			id = gerarIdAleatorio();
 
+			// (log)
+			if(getClientePorCpf(cpf) == null) {
+				System.out.println("Cliente não existia. Portanto, criando um novo!");
+			}
+			
 			if (getClientePorCpf(cpf) != null) {
 				// (log) usei para ver se o cliente já existia
-				System.out.println("Cliente já existe, portanto, para n repetir, apenas retornei ele :]");
+				System.out.println("Cliente já existe, portanto, para n repetir, apenas retornei ele :]"); 
 				return getClientePorCpf(cpf);
 			}
 
@@ -43,7 +47,7 @@ public class GerenciadorClientes {
 			Cliente novoCliente = new Cliente(id, cpf, nome, sobrenome);
 			
 			// (log) apenas para ver se o cliente tá vindo com os dados certos
-			System.out.println(novoCliente);
+			System.out.println(Formatador.formatarCpf(novoCliente.getCPF()) + " " + novoCliente.getNomeCompleto());
 			guardaNaLista(novoCliente);
 
 			return novoCliente;
@@ -83,12 +87,12 @@ public class GerenciadorClientes {
 		return nome.isEmpty() || sobrenome.isEmpty();
 	}
 
-	public String criarCpf() {
+	private String criarCpf() {
 		String cpf;
 		String padraoDigitosCpf = "\\d{11}";
 
 		do {
-			System.out.println("Antes de continuar, por favor, digite seu CPF (apenas números):");
+			System.out.println("Antes de continuar, por favor, digite seu CPF: ");
 			cpf = scan.nextLine().trim();
 
 			if (!cpf.matches(padraoDigitosCpf)) {
@@ -99,7 +103,6 @@ public class GerenciadorClientes {
 
 		return cpf;
 	}
-
 
 	private String[] criarNomeSobrenome(String nome, String sobrenome) {
 		System.out.println("Agora, digite seu nome:");
@@ -120,4 +123,5 @@ public class GerenciadorClientes {
 		numerosGerados.add(idAleatorio);
 		return idAleatorio;
 	}
+	
 }
