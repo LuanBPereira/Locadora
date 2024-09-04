@@ -84,25 +84,22 @@ public class GerenciadorClientes {
 	}
 
 	public String criarCpf() {
-	    String cpf;
-	    String padraoCpfSemFormato = "\\d{11}";
+		String cpf;
+		String padraoDigitosCpf = "\\d{11}";
 
-	    Pattern patternSemFormato = Pattern.compile(padraoCpfSemFormato);
+		do {
+			System.out.println("Antes de continuar, por favor, digite seu CPF (apenas números):");
+			cpf = scan.nextLine().trim();
 
-	    do {
-	        System.out.println("Antes de continuar, por favor, digite seu CPF (apenas números):");
-	        cpf = scan.nextLine().trim();
+			if (!cpf.matches(padraoDigitosCpf)) {
+				System.err.println("CPF inválido. Por favor, certifique-se de que ele contém exatamente 11 dígitos numéricos.");
+			}
 
-	        Matcher matcherSemFormato = patternSemFormato.matcher(cpf);
+		} while (!cpf.matches(padraoDigitosCpf));
 
-	        if (!matcherSemFormato.matches()) {
-	            System.err.println("CPF inválido. Por favor, use apenas números.");
-	        }
-
-	    } while (!(cpf.length() == 11));
-
-	    return cpf;
+		return cpf;
 	}
+
 
 	private String[] criarNomeSobrenome(String nome, String sobrenome) {
 		System.out.println("Agora, digite seu nome:");
