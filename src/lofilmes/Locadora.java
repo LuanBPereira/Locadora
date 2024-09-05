@@ -50,7 +50,7 @@ public class Locadora {
 
 	private void executarEscolhaPrincipal(int escolha) {
 		switch (escolha) {
-		case 1 -> catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes(), Formatador.DATA_FORMATADA);
+		case 1 -> catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes());
 		case 2 -> servicosLocacao.alugarFilme(catalogoFilmes);
 		case 3 -> entrarMenuDeConsultas();
 		case 4 -> gerenciadorClientes.listarCLientes();
@@ -88,12 +88,12 @@ public class Locadora {
 
 	private void executarEscolhaConsultas(int escolha) {
 		switch (escolha) {
-		case 1 -> consultas.consultarFilmePorTitulo(catalogoFilmes, Formatador.DATA_FORMATADA);
-		case 2 -> consultas.consultarFilmePorDiretor(catalogoFilmes, Formatador.DATA_FORMATADA);
-		case 3 -> consultas.consultarFilmePorCategoria(catalogoFilmes, Formatador.DATA_FORMATADA);	
-		case 4 -> consultas.consultarFilmePorPreco(catalogoFilmes, Formatador.DATA_FORMATADA);
-		case 5 -> consultas.consultarHistorico(historicoLocacoes, Formatador.DATA_FORMATADA);
-		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes, Formatador.DATA_FORMATADA);
+		case 1 -> consultas.consultarFilmePorTitulo(catalogoFilmes, Formatador.FORMATO_DATA_BR);
+		case 2 -> consultas.consultarFilmePorDiretor(catalogoFilmes, Formatador.FORMATO_DATA_BR);
+		case 3 -> consultas.consultarFilmePorCategoria(catalogoFilmes, Formatador.FORMATO_DATA_BR);
+		case 4 -> consultas.consultarFilmePorPreco(catalogoFilmes, Formatador.FORMATO_DATA_BR);
+		case 5 -> consultas.consultarHistorico(historicoLocacoes, Formatador.FORMATO_DATA_BR);
+		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes, Formatador.FORMATO_DATA_BR);
 		case 7 -> consultas.consultarFilmeMaisLocado(historicoLocacoes);	
 		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);	
 		case 9 -> consultas.consultarClienteQueMaisLocou(historicoLocacoes, gerenciadorClientes);	

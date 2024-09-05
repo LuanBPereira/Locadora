@@ -33,15 +33,11 @@ public class CatalogoFilmes {
 				List.of("Matthew McConaughey", "Anne Hathaway"), data(2014, 11, 7), 169, 26.00));
 	}
 
-	public void listarFilmes(List<Filme> filmes, DateTimeFormatter dataFormatada) {
-		StringBuilder sb = new StringBuilder();
-
+	public void listarFilmes(List<Filme> filmes) {
 		for (int i = 0; i < filmes.size(); i++) {
 			Filme f = filmes.get(i);
-			sb.append(String.format("\n%d) \n%s", (i + 1), f));
+			System.out.printf("\n%d) \n%s", (i + 1), f);
 		}
-
-		System.out.println(sb.toString());
 	}
 
 	public List<Filme> getListaFilmes() {

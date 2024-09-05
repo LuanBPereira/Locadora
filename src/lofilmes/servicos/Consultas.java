@@ -30,7 +30,7 @@ public class Consultas {
 			}
 		}
 
-		catalogo.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogo.listarFilmes(filmesEncontrados);
 	}
 
 	public void consultarFilmePorDiretor(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
@@ -45,7 +45,7 @@ public class Consultas {
 				filmesEncontrados.add(f);
 			}
 		}
-		catalogo.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogo.listarFilmes(filmesEncontrados);
 	}
 
 	public void consultarFilmePorCategoria(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
@@ -60,7 +60,7 @@ public class Consultas {
 				if (categoria.toLowerCase().contains(categorias)) {
 					filmesEncontrados.add(f);
 				}
-		catalogo.listarFilmes(filmesEncontrados, dataFormatada);
+		catalogo.listarFilmes(filmesEncontrados);
 	}
 
 	public void consultarFilmePorPreco(CatalogoFilmes catalogo, DateTimeFormatter dataFormatada) {
@@ -87,7 +87,7 @@ public class Consultas {
 						filmesEncontrados.add(f);
 					}
 				}
-				catalogo.listarFilmes(filmesEncontrados, dataFormatada);
+				catalogo.listarFilmes(filmesEncontrados);
 				break;
 			} catch (InputMismatchException e) {
 				System.err.println("Erro: Entrada inválida. Insira apenas números no preço.");

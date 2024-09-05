@@ -55,16 +55,33 @@ public class Filme {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("Título: '%s'\n", getTitulo()));
-		sb.append(String.format("Categorias: '%s'\n", String.join(", ", getCategorias())));
-		sb.append(String.format("Diretor: '%s'\n", getDiretor()));
-		sb.append(String.format("Atores: '%s'\n", String.join(", ", getAtores())));
-		sb.append(String.format("Data de Lançamento: '%s'\n", getDataLancamento().format(Formatador.DATA_FORMATADA)));
-		sb.append(String.format("Duração: '%d min'\n", getDuracao()));
-		sb.append(String.format("Preço de Locação: 'R$%.2f'\n", getPrecoLocacao()));
-
-		return sb.toString();
+		return "Título: " + getTitulo() + "\n" +
+				"Categorias: " + String.join(", ", getCategorias()) + "\n" +
+				"Diretor: " + getDiretor() + "\n" +
+				"Atores: " + String.join(", ", getAtores()) + "\n" +
+				"Data de Lançamento: " + getDataLancamento().format(Formatador.FORMATO_DATA_BR) + "\n" +
+				"Duração: " + getDuracao() + " min\n" +
+				"Preço de Locação: R$ " + String.format("%.2f", getPrecoLocacao()) + "\n";
 	}
 
+	/*
+	 *	Achei um jeito interessante de fazer o metodo toString
+	 * 	no StackOverflow, achei robusto e menos propicio a dar erros.
+	 * 	Porém, tem coisas que não entendi muito bem, então quero dar
+	 * 	umas olhadas a mais, mas vou deixar salvo aqui para revisar.
+	 *
+	 *	@Override
+	 *	public String toString() {
+	 *	StringBuilder sb = new StringBuilder();
+	 *	sb.append("Título: ").append(getTitulo() != null ? getTitulo() : "N/A").append("\n");
+	 *	sb.append("Categorias: ").append(getCategorias() != null ? String.join(", ", getCategorias()) : "N/A").append("\n");
+	 *	sb.append("Diretor: ").append(getDiretor() != null ? getDiretor() : "N/A").append("\n");
+	 *	sb.append("Atores: ").append(getAtores() != null ? String.join(", ", getAtores()) : "N/A").append("\n");
+	 *	sb.append("Data de Lançamento: ").append(getDataLancamento() != null ? getDataLancamento().format(Formatador.DATA_FORMATADA) : "N/A").append("\n");
+	 *	sb.append("Duração: ").append(getDuracao()).append(" min\n");
+	 *	sb.append("Preço de Locação: R$").append(String.format("%.2f", getPrecoLocacao())).append("\n");
+	 *
+	 *	return sb.toString();
+	 *	}
+	 */
 }

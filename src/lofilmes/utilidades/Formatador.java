@@ -3,9 +3,8 @@ package lofilmes.utilidades;
 import java.time.format.DateTimeFormatter;
 
 public class Formatador {
-	public static final DateTimeFormatter DATA_FORMATADA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
-	
+	public static final DateTimeFormatter FORMATO_DATA_BR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 	public static String formatarCpf(String cpf) {
 		if (cpf == null || !cpf.matches("\\d{11}")) {
 			throw new IllegalArgumentException("CPF deve conter 11 dígitos numéricos.");
