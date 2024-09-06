@@ -34,7 +34,7 @@ public class GerenciadorClientes {
 				return getClientePorCpf(cpf);
 			}
 
-			String[] nomeSobrenome = criarNomeSobrenome(nome, sobrenome);
+			String[] nomeSobrenome = criarNomeSobrenome();
 			nome = nomeSobrenome[0];
 			sobrenome = nomeSobrenome[1];
 
@@ -104,14 +104,26 @@ public class GerenciadorClientes {
 		return cpf;
 	}
 
-	private String[] criarNomeSobrenome(String nome, String sobrenome) {
-		System.out.println("Agora, digite seu nome:");
-		nome = scan.nextLine().trim();
-
-		System.out.println("Ótimo " + nome + ", agora seu sobrenome:");
-		sobrenome = scan.nextLine().trim();
-
+	private String[] criarNomeSobrenome() {
+		String nome = validarEntrada("nome");
+		String sobrenome = validarEntrada("sobrenome");
+		
 		return new String[] { nome, sobrenome };
+	}
+		
+	private String validarEntrada(String tipo) {
+	    String entrada;
+	    
+	    while (true) {
+	        System.out.println("Agora, digite seu " + tipo + ":");
+	        entrada = scan.nextLine().trim();
+	        
+	        if (entrada.matches("[a-zA-Z]+")) {
+	            return entrada;  // retorna entrada valida
+	        } else {
+	            System.out.println(tipo + " inválido. Por favor, digite apenas letras."); 
+	        }
+	    }
 	}
 
 	private Long gerarIdAleatorio() {

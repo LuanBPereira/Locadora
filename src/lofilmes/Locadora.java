@@ -30,7 +30,7 @@ public class Locadora {
 		do {
 			escolha = exibirMenuPrincipal();
 			executarEscolhaPrincipal(escolha);
-		} while (escolha != 6);
+		} while (escolha != 5);
 		scan.close();
 	}
 
@@ -64,7 +64,7 @@ public class Locadora {
 		do {
 			escolha = exibirMenuConsultas();
 			executarEscolhaConsultas(escolha);
-		} while (escolha != 9);
+		} while (escolha != 10);
 	}
 
 	private int exibirMenuConsultas() {
@@ -73,10 +73,10 @@ public class Locadora {
 				---------------
 				Seja bem vindo ao menu de consultas! O que desejaria?
 
-				1 - Consulta por titulo
+				1 - Consulta por título
 				2 - Consulta por diretor
 				3 - Consulta por categoria
-				4 - Consulta por preco
+				4 - Consulta por preço
 				5 - Consulta histórico locações
 				6 - Consulta filmes locados nos últimos 7 dias
 				7 - Consulta filmes mais locados
