@@ -11,14 +11,26 @@ import lofilmes.utilidades.Formatador;
 import lofilmes.utilidades.GerenciadorMenu;
 
 public class Locadora {
-	private Scanner scan = new Scanner(System.in);
+	
+	private final Scanner scan;
+	private final GerenciadorMenu gerenciadorMenu;
+	private final GerenciadorClientes gerenciadorClientes;
+	private final HistoricoLocacoes historicoLocacoes;
+	private final CatalogoFilmes catalogoFilmes;
+	private final Consultas consultas;
+	private final ServicosLocacao servicosLocacao;
 
-	private GerenciadorMenu gerenciadorMenu = new GerenciadorMenu(scan);
-	private GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
-	private HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
-	private CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
-	private Consultas consultas = new Consultas(scan);
-	private ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gerenciadorClientes, historicoLocacoes);
+	public Locadora(Scanner scan, GerenciadorMenu gerenciadorMenu, GerenciadorClientes gerenciadorClientes,
+			HistoricoLocacoes historicoLocacoes, CatalogoFilmes catalogoFilmes, Consultas consultas,
+			ServicosLocacao servicosLocacao) {
+		this.scan = scan;
+		this.gerenciadorMenu = gerenciadorMenu;
+		this.gerenciadorClientes = gerenciadorClientes;
+		this.historicoLocacoes = historicoLocacoes;
+		this.catalogoFilmes = catalogoFilmes;
+		this.consultas = consultas;
+		this.servicosLocacao = servicosLocacao;
+	}
 
 	public void executarLocadora() {
 		entrarMenuPrincipal();
@@ -53,7 +65,7 @@ public class Locadora {
 		case 1 -> catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes());
 		case 2 -> servicosLocacao.alugarFilme(catalogoFilmes);
 		case 3 -> entrarMenuDeConsultas();
-		case 4 -> gerenciadorClientes.listarCLientes();
+		case 4 -> gerenciadorClientes.listarClientes();
 		case 5 -> System.out.println("Encerrando programa...");
 		default -> System.err.println("Opção não disponível.");
 		}
@@ -88,18 +100,18 @@ public class Locadora {
 
 	private void executarEscolhaConsultas(int escolha) {
 		switch (escolha) {
-		case 1 -> consultas.consultarFilmePorTitulo(catalogoFilmes, Formatador.FORMATO_DATA_BR);
-		case 2 -> consultas.consultarFilmePorDiretor(catalogoFilmes, Formatador.FORMATO_DATA_BR);
-		case 3 -> consultas.consultarFilmePorCategoria(catalogoFilmes, Formatador.FORMATO_DATA_BR);
-		case 4 -> consultas.consultarFilmePorPreco(catalogoFilmes, Formatador.FORMATO_DATA_BR);
-		case 5 -> consultas.consultarHistorico(historicoLocacoes, Formatador.FORMATO_DATA_BR);
-		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes, Formatador.FORMATO_DATA_BR);
-		case 7 -> consultas.consultarFilmeMaisLocado(historicoLocacoes);	
-		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);	
-		case 9 -> consultas.consultarClienteQueMaisLocou(historicoLocacoes, gerenciadorClientes);	
-		case 10 -> System.out.println("Retornando ao menu principal...");	
+		case 1 -> consultas.consultarFilmePorTitulo(catalogoFilmes);
+		case 2 -> consultas.consultarFilmePorDiretor(catalogoFilmes);
+		case 3 -> consultas.consultarFilmePorCategoria(catalogoFilmes);
+		case 4 -> consultas.consultarFilmePorPreco(catalogoFilmes);
+		case 5 -> consultas.consultarHistorico(historicoLocacoes);
+		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes);
+		case 7 -> consultas.consultarFilmeMaisLocado(historicoLocacoes);
+		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);
+		case 9 -> consultas.consultarClienteQueMaisLocou(historicoLocacoes, gerenciadorClientes);
+		case 10 -> System.out.println("Retornando ao menu principal...");
 		default -> System.err.println("Opção não disponível.");
-			
+
 		}
 	}
 

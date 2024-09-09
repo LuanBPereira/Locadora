@@ -9,80 +9,85 @@ import lofilmes.modelos.Cliente;
 import lofilmes.modelos.Filme;
 
 public class ServicosLocacao {
-	private GerenciadorClientes gerenciadorClientes;
-	private HistoricoLocacoes historicoLocacoes;
-	private Scanner scan;
+    private GerenciadorClientes gerenciadorClientes;
+    private HistoricoLocacoes historicoLocacoes;
+    private GerenciadorEntradas gerenciadorEntradas;
+    private Scanner scan;
 
-	public ServicosLocacao(Scanner s, GerenciadorClientes gc, HistoricoLocacoes hl) {
-		this.scan = s;
-		this.gerenciadorClientes = gc;
-		this.historicoLocacoes = hl;
-	}
+    public ServicosLocacao(Scanner s, GerenciadorClientes gc, HistoricoLocacoes hl, GerenciadorEntradas ge) {
+        this.scan = s;
+        this.gerenciadorClientes = gc;
+        this.historicoLocacoes = hl;
+        this.gerenciadorEntradas = ge;
+    }
 
-	public void alugarFilme(CatalogoFilmes catalogo) {
-		List<Filme> listaFilmes = catalogo.getListaFilmes();
-		LocalDate data = LocalDate.now();
+    public void alugarFilme(CatalogoFilmes catalogo) {
+        List<Filme> listaFilmes = catalogo.getListaFilmes();
+        LocalDate data = LocalDate.now();
 
-		Cliente cliente = gerenciadorClientes.criarCliente();
+        // coleta de dados feita com o gerenciador de entradas
+        String cpf = gerenciadorEntradas.solicitarCpf();
+        String[] nomeSobrenome = gerenciadorEntradas.solicitarNomeSobrenome();
+        Long id = gerenciadorEntradas.gerarIdAleatorio();
 
-		int opcaoFilme = getOpcaoFilme(listaFilmes);
-		int diasAlugado = getDiasAlugado();
+        // após os dados coletados, cria o cliente com a classe responsavel 
+        // pelo gerenciamento do cliente
+        Cliente cliente = gerenciadorClientes.criarCliente(cpf, nomeSobrenome[0], nomeSobrenome[1], id);
 
-		Filme filmeEscolhido = listaFilmes.get(opcaoFilme - 1);
-		System.out.println("Filme '" + filmeEscolhido.getTitulo() + "' escolhido com sucesso!");
+        int opcaoFilme = getOpcaoFilme(listaFilmes);
+        int diasAlugado = getDiasAlugado();
 
-		double precoTotal = getPrecoTotal(filmeEscolhido.getPrecoLocacao(), diasAlugado);
-		historicoLocacoes.salvar(cliente, precoTotal, data, filmeEscolhido, diasAlugado);
-		System.out.println("Aluguel realizado com sucesso! Preço total: R$ " + precoTotal);
-	}
+        Filme filmeEscolhido = listaFilmes.get(opcaoFilme - 1);
+        System.out.println("Filme '" + filmeEscolhido.getTitulo() + "' escolhido com sucesso!");
 
-	private int getOpcaoFilme(List<Filme> listaFilmes) {
-		while (true) {
-			try {
-				System.out.println("Qual filme você gostaria de alugar? (Digite de acordo com o número mostrado no catálogo)");
-				int opcaoFilme = scan.nextInt();
-				scan.nextLine();
+        double precoTotal = getPrecoTotal(filmeEscolhido.getPrecoLocacao(), diasAlugado);
+        historicoLocacoes.salvar(cliente, precoTotal, data, filmeEscolhido, diasAlugado);
+        System.out.println("Aluguel realizado com sucesso! Preço total: R$ " + precoTotal);
+    }
 
-				if (!isFilmeValido(opcaoFilme, listaFilmes.size())) {
-					System.out.println("Opção indisponível. Tente novamente.");
-					continue;
-				}
-				return opcaoFilme;
-			} catch (InputMismatchException e) {
-				System.err.println("Entrada inválida. Por favor, insira um número.");
-				scan.nextLine();
-			}
-		}
-	}
+    private int getOpcaoFilme(List<Filme> listaFilmes) {
+        while (true) {
+            try {
+                System.out.println("Qual filme você gostaria de alugar? (Digite o número):");
+                int opcaoFilme = scan.nextInt();
+                scan.nextLine();
 
-	private int getDiasAlugado() {
-		while (true) {
-			try {
-				System.out.println("Por quantos dias você quer alugar o filme?");
-				int diasAlugado = scan.nextInt();
-				scan.nextLine();
+                if (!isFilmeValido(opcaoFilme, listaFilmes.size())) {
+                    System.out.println("Opção inválida. Tente novamente.");
+                    continue;
+                }
+                return opcaoFilme;
+            } catch (InputMismatchException e) {
+                System.err.println("Entrada inválida. Por favor, insira um número.");
+                scan.nextLine();
+            }
+        }
+    }
 
-				if (!isDiasValido(diasAlugado)) {
-					System.out.println("Número de dias inválido. Deve ser maior que 0.");
-					continue;
-				}
-				return diasAlugado;
-			} catch (InputMismatchException e) {
-				System.err.println("Entrada inválida. Por favor, insira um número.");
-				scan.nextLine();
-			}
-		}
-	}
+    private int getDiasAlugado() {
+        while (true) {
+            try {
+                System.out.println("Por quantos dias deseja alugar o filme?");
+                int diasAlugado = scan.nextInt();
+                scan.nextLine();
 
-	private double getPrecoTotal(double precoLocacao, int diasAlugados) {
-		return precoLocacao * diasAlugados;
-	}
+                if (diasAlugado <= 0) {
+                    System.out.println("Número de dias inválido. Tente novamente.");
+                    continue;
+                }
+                return diasAlugado;
+            } catch (InputMismatchException e) {
+                System.err.println("Entrada inválida. Por favor, insira um número.");
+                scan.nextLine();
+            }
+        }
+    }
 
-	private boolean isDiasValido(int diasAlugado) {
-		return diasAlugado > 0;
-	}
+    private double getPrecoTotal(double precoLocacao, int diasAlugados) {
+        return precoLocacao * diasAlugados;
+    }
 
-	private boolean isFilmeValido(int opcaoFilme, int tamanhoLista) {
-		return opcaoFilme > 0 && opcaoFilme <= tamanhoLista;
-	}
+    private boolean isFilmeValido(int opcaoFilme, int tamanhoLista) {
+        return opcaoFilme > 0 && opcaoFilme <= tamanhoLista;
+    }
 }

@@ -3,24 +3,24 @@ package lofilmes.modelos;
 import java.util.Objects;
 
 public class Cliente {
-	private final Long ID;
-	private final String CPF;
+	private final Long id;
+	private final String cpf;
 	private String nome;
 	private String sobrenome;
 	
 	public Cliente(Long id, String cpf, String nome, String sobrenome) {
-		this.ID = id;
-		this.CPF = cpf;
+		this.id = id;
+		this.cpf = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 	}
 	
 	public Long getID() {
-		return ID;
+		return id;
 	}
 	
 	public String getCPF() {
-		return CPF;
+		return cpf;
 	}
 	
 	public String getNome() {
@@ -40,17 +40,17 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return CPF.equals(cliente.CPF);
+        return cpf.equals(cliente.cpf);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(CPF);
+        return Objects.hash(cpf);
     }
 	
 	@Override
 	public String toString() {
-		return "Cpf: " + CPF + " | Cliente: " + getNomeCompleto();
+		return "Cpf: " + cpf + " | Cliente: " + getNomeCompleto();
 	}
 
 	
