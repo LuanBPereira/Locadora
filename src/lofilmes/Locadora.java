@@ -100,10 +100,10 @@ public class Locadora {
 
 	private void executarEscolhaConsultas(int escolha) {
 		switch (escolha) {
-		case 1 -> consultas.consultarFilmePorTitulo(catalogoFilmes);
-		case 2 -> consultas.consultarFilmePorDiretor(catalogoFilmes);
-		case 3 -> consultas.consultarFilmePorCategoria(catalogoFilmes);
-		case 4 -> consultas.consultarFilmePorPreco(catalogoFilmes);
+		case 1 -> consultas.consultarFilmePorTitulo();
+		case 2 -> consultas.consultarFilmePorDiretor();
+		case 3 -> consultas.consultarFilmePorCategoria();
+		case 4 -> consultas.consultarFilmePorPreco();
 		case 5 -> consultas.consultarHistorico(historicoLocacoes);
 		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes);
 		case 7 -> consultas.consultarFilmeMaisLocado(historicoLocacoes);

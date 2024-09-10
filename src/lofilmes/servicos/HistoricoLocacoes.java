@@ -35,33 +35,41 @@ public class HistoricoLocacoes {
 
 		return alugadosRecentes;
 	}
-
+	
 	public List<String> getFilmesMaisLocados() {
-		Map<String, Integer> contagemFilmes = new HashMap<>();
-		List<String> filmesMaisLocados = new ArrayList<>();
-		int contagemMax = 0;
+	    Map<String, Integer> contagemFilmes = new HashMap<>();
+	    List<String> filmesMaisLocados = new ArrayList<>();
+	    int contagemMax = 0;
 
-		for (DadosLocacao dadosL : historico) {
-			String titulo = dadosL.filme().getTitulo();
-			int contagemAtual = contagemFilmes.getOrDefault(titulo, 0) + 1;
-			contagemFilmes.put(titulo, contagemAtual);
+	    for (DadosLocacao dadosL : historico) {
+	        String titulo = dadosL.filme().getTitulo();
+	        int contagemAtual = contagemFilmes.getOrDefault(titulo, 0) + 1;
+	        contagemFilmes.put(titulo, contagemAtual);
 
-			if (contagemAtual > contagemMax) {
-				contagemMax = contagemAtual;
-			}
-		}
+	        /*
+	         * Apenas gostaria de explicar o porquê de ter usado o clear() na lista de cliente que mais locou:
+	         * se a contagem do cliente foir maior que a contagemMax, a contagemMax recebe o numero de vezes
+	         * que esse cliente apareceu, limpa a lista de cliente que mais locou. 
+	         * Isso é para evitar que um cliente anterior que mais locou apareça de novo. 
+	         * Por exemplo, clienteA alugou 3x e o clienteB 4x,
+	         * o clienteA apareceria junto com o clienteB, o que não faz sentido. Já que o cliente A foi que mais locou.
+	         */
+	        
+	        // se encontramos um novo máximo, limpamos a lista e adicionamos o filme
+	        if (contagemAtual > contagemMax) {
+	            contagemMax = contagemAtual;
+	            filmesMaisLocados.clear();  
+	            filmesMaisLocados.add(titulo);
+	        } 
+	        // se a contagem é igual ao máximo, apenas adicionar à lista
+	        else if (contagemAtual == contagemMax) {
+	            filmesMaisLocados.add(titulo);
+	        }
+	    }
 
-		for (Map.Entry<String, Integer> entry : contagemFilmes.entrySet()) {
-			String filme = entry.getKey();
-			int contagem = entry.getValue();
-			
-			if (contagem == contagemMax) {
-				filmesMaisLocados.add(filme);
-			}
-		}
-
-		return filmesMaisLocados;
+	    return filmesMaisLocados;
 	}
+
 
 	public double getValorTotalLocacoesUltimoMes() {
 		LocalDate dataAtual = LocalDate.now();
@@ -82,32 +90,31 @@ public class HistoricoLocacoes {
 	    List<String> clienteQueMaisLocou = new ArrayList<>();
 	    int contagemMax = 0;
 
-	    // contagem de locações por cliente
+	    // contagem de locações por cliente e identificação dos que mais locaram
 	    for (DadosLocacao dadosL : historico) {
 	        Long idCliente = dadosL.cliente().getID();
 	        int contagemAtual = contagemLocacaoCliente.getOrDefault(idCliente, 0) + 1;
 	        contagemLocacaoCliente.put(idCliente, contagemAtual);
-
-	        if(contagemAtual > contagemMax) {
-	        	contagemMax = contagemAtual;
-	        }
-	    }
-
-	    // identificar o(s) cliente(s) que mais locaram
-	    for (Map.Entry<Long, Integer> entry : contagemLocacaoCliente.entrySet()) {
-	        Long id = entry.getKey();
-	        int contagem = entry.getValue();
 	        
-	        if (contagem == contagemMax) {
-	            Cliente cliente = gerenciadorClientes.getClientePorId(id);
+	        // se encontramos um novo máximo, limpamos a lista e adicionamos o cliente
+	        if (contagemAtual > contagemMax) {
+	            contagemMax = contagemAtual;
+	            clienteQueMaisLocou.clear(); // explicação do porquê usar o clear() no metodo getFilmesMaisLocados(). (linha 49 - 56)
+	            Cliente cliente = gerenciadorClientes.getClientePorId(idCliente);
 	            if (cliente != null) {
-	                String nomeCompleto = cliente.getNomeCompleto();
-	                clienteQueMaisLocou.add(nomeCompleto);
+	                clienteQueMaisLocou.add(cliente.getNomeCompleto());
+	            }
+	         // se a contagem é igual ao máximo, apenas adicionar à lista
+	        } else if (contagemAtual == contagemMax) {
+	            Cliente cliente = gerenciadorClientes.getClientePorId(idCliente);
+	            if (cliente != null) {
+	                clienteQueMaisLocou.add(cliente.getNomeCompleto());
 	            }
 	        }
 	    }
 
 	    return clienteQueMaisLocou;
 	}
+
 	
 }
