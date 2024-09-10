@@ -1,8 +1,6 @@
-package lofilmes.servicos;
+package lofilmes.utilidades;
 
 import java.util.Scanner;
-
-import lofilmes.utilidades.GeradorId;
 
 public class GerenciadorEntradas {
 
@@ -32,6 +30,11 @@ public class GerenciadorEntradas {
         return new String[]{nome, sobrenome};
     }
 
+    public Long gerarIdAleatorio() {
+
+        return GeradorId.gerarIdAleatorio();
+    }
+    
     private String solicitarEntrada(String tipo) {
         String entrada;
         do {
@@ -42,10 +45,6 @@ public class GerenciadorEntradas {
             }
         } while (!entrada.matches("[a-zA-Z]+"));
         return entrada;
-    }
-
-    public Long gerarIdAleatorio() {
-        return GeradorId.gerarIdAleatorio();
     }
 	
 }

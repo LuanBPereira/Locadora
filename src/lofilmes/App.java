@@ -5,9 +5,9 @@ import java.util.Scanner;
 import lofilmes.servicos.CatalogoFilmes;
 import lofilmes.servicos.Consultas;
 import lofilmes.servicos.GerenciadorClientes;
-import lofilmes.servicos.GerenciadorEntradas;
 import lofilmes.servicos.HistoricoLocacoes;
 import lofilmes.servicos.ServicosLocacao;
+import lofilmes.utilidades.GerenciadorEntradas;
 import lofilmes.utilidades.GerenciadorMenu;
 
 public class App {

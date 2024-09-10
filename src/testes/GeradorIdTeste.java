@@ -1,18 +1,17 @@
-// GeradorId.java
-package lofilmes.utilidades;
+package testes;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class GeradorId {
-	private static Set<Long> numerosGerados = new HashSet<>();
+public class GeradorIdTeste {
+	private  Set<Long> numerosGerados = new HashSet<>();
 	
-	public static Set<Long> getLista() {
+	public  Set<Long> getLista() {
 		return numerosGerados;
 	}
 	
-    public static Long gerarIdAleatorio() {
+    public  Long gerarIdAleatorio() {
         Long idAleatorio;
         do {
             idAleatorio = new Random().nextLong() & Long.MAX_VALUE;

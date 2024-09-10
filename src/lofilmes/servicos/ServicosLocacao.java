@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import lofilmes.modelos.Cliente;
 import lofilmes.modelos.Filme;
+import lofilmes.utilidades.GerenciadorEntradas;
 
 public class ServicosLocacao {
     private GerenciadorClientes gerenciadorClientes;
