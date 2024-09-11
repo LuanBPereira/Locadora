@@ -31,7 +31,6 @@ public class GerenciadorEntradas {
     }
 
     public Long gerarIdAleatorio() {
-
         return GeradorId.gerarIdAleatorio();
     }
     

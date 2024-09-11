@@ -7,7 +7,7 @@ import java.util.Map;
 public class GerenciadorClientes {
 	private Map<Long, Cliente> listaClientes = new HashMap<>();
 
-	public Cliente criarCliente(String cpf, String nome, String sobrenome, Long id) {
+	public Cliente criarCliente(Long id, String cpf, String nome, String sobrenome) {
 		Cliente clienteExistente = getClientePorCpf(cpf);
 		if (clienteExistente != null) {
 			System.out.println("Cliente já existe. Retornando cliente existente.");
