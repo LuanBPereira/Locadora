@@ -1,5 +1,8 @@
 package testes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lofilmes.utilidades.GeradorId;
 
 /*
@@ -9,28 +12,40 @@ import lofilmes.utilidades.GeradorId;
  */
 
 class ClasseA {
-    public void gerarId(){
-        GeradorId.gerarIdAleatorio();
-    }
+	GeradorId geradorId = new GeradorId();
+
+	public Long gerarId() {
+		return geradorId.gerarIdAleatorio();
+
+	}
 }
 
 class ClasseB {
-    public void gerarId(){
-        GeradorId.gerarIdAleatorio();
-    }
+	GeradorId geradorId = new GeradorId();
+
+	public Map<Long, String> criarPessoa (){
+		Map<Long, String> Pessoa = new HashMap<>();
+	}
+	
+	public Long gerarId() {
+		return geradorId.gerarIdAleatorio();
+	}
 }
 
 public class TesteGeradorId {
 
-    public static void main(String[] args) {
-        ClasseA a = new ClasseA();
-        ClasseB b = new ClasseB();
-        a.gerarId();
-        b.gerarId();
+	public static void main(String[] args) {
+		GeradorId geradorId = new GeradorId();
+		ClasseA a = new ClasseA();
+		ClasseB b = new ClasseB();
+		a.gerarId();
+		a.gerarId();
+		b.gerarId();
 
-        System.out.println();
+		System.out.println("Números gerados ClasseA: " + a.geradorId.getNumerosGerados());
+		System.out.println("Números gerados ClasseB: " + b.geradorId.getNumerosGerados());
+		System.out.println("Números guardado lista Geral: " + geradorId.getNumerosGerados());
 
-
-    }
+	}
 
 }
