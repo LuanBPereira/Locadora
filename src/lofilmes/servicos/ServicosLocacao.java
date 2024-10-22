@@ -10,12 +10,12 @@ import lofilmes.modelos.Filme;
 import lofilmes.utilidades.GerenciadorEntradas;
 
 public class ServicosLocacao {
-    private GerenciadorClientes gerenciadorClientes;
+    private GestaoClientes gerenciadorClientes;
     private HistoricoLocacoes historicoLocacoes;
     private GerenciadorEntradas gerenciadorEntradas;
     private Scanner scan;
 
-    public ServicosLocacao(Scanner s, GerenciadorClientes gc, HistoricoLocacoes hl, GerenciadorEntradas ge) {
+    public ServicosLocacao(Scanner s, GestaoClientes gc, HistoricoLocacoes hl, GerenciadorEntradas ge) {
         this.scan = s;
         this.gerenciadorClientes = gc;
         this.historicoLocacoes = hl;

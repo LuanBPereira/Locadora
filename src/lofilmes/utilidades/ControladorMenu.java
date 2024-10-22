@@ -3,11 +3,11 @@ package lofilmes.utilidades;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class GerenciadorMenu {
+public class ControladorMenu {
 	
 	private Scanner scan;
 	
-	public GerenciadorMenu(Scanner scan){
+	public ControladorMenu(Scanner scan){
 		this.scan = scan;
 	}
 	

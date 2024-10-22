@@ -4,7 +4,7 @@ import lofilmes.modelos.Cliente;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GerenciadorClientes {
+public class GestaoClientes {
 	private Map<Long, Cliente> listaClientes = new HashMap<>();
 
 	public Cliente criarCliente(Long id, String cpf, String nome, String sobrenome) {

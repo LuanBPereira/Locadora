@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import lofilmes.servicos.CatalogoFilmes;
 import lofilmes.servicos.Consultas;
-import lofilmes.servicos.GerenciadorClientes;
+import lofilmes.servicos.GestaoClientes;
 import lofilmes.servicos.HistoricoLocacoes;
 import lofilmes.servicos.ServicosLocacao;
 import lofilmes.utilidades.GerenciadorEntradas;
-import lofilmes.utilidades.GerenciadorMenu;
+import lofilmes.utilidades.ControladorMenu;
 
 public class App {
 
@@ -17,8 +17,8 @@ public class App {
 		
 		// instancias dos serviços
 		GerenciadorEntradas gerenciadorEntradas = new GerenciadorEntradas(scan);
-		GerenciadorMenu gerenciadorMenu = new GerenciadorMenu(scan);
-		GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
+		ControladorMenu gerenciadorMenu = new ControladorMenu(scan);
+		GestaoClientes gerenciadorClientes = new GestaoClientes();
 		HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
 		CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
 		Consultas consultas = new Consultas(scan, catalogoFilmes);

@@ -85,7 +85,7 @@ public class HistoricoLocacoes {
 		return total;
 	}
 
-	public List<String> getClienteQueMaisLocou(GerenciadorClientes gerenciadorClientes) {
+	public List<String> getClienteQueMaisLocou(GestaoClientes gerenciadorClientes) {
 	    Map<Long, Integer> contagemLocacaoCliente = new HashMap<>();
 	    List<String> clienteQueMaisLocou = new ArrayList<>();
 	    int contagemMax = 0;

@@ -4,24 +4,24 @@ import java.util.Scanner;
 
 import lofilmes.servicos.CatalogoFilmes;
 import lofilmes.servicos.Consultas;
-import lofilmes.servicos.GerenciadorClientes;
+import lofilmes.servicos.GestaoClientes;
 import lofilmes.servicos.HistoricoLocacoes;
 import lofilmes.servicos.ServicosLocacao;
-import lofilmes.utilidades.GerenciadorMenu;
+import lofilmes.utilidades.ControladorMenu;
 
 public class Locadora {
 	
 	private final Scanner scan;
-	private final GerenciadorMenu gerenciadorMenu;
-	private final GerenciadorClientes gerenciadorClientes;
+	private final ControladorMenu gerenciadorMenu;
+	private final GestaoClientes gerenciadorClientes;
 	private final HistoricoLocacoes historicoLocacoes;
 	private final CatalogoFilmes catalogoFilmes;
 	private final Consultas consultas;
 	private final ServicosLocacao servicosLocacao;
 
-	public Locadora(Scanner scan, GerenciadorMenu gerenciadorMenu, GerenciadorClientes gerenciadorClientes,
-			HistoricoLocacoes historicoLocacoes, CatalogoFilmes catalogoFilmes, Consultas consultas,
-			ServicosLocacao servicosLocacao) {
+	public Locadora(Scanner scan, ControladorMenu gerenciadorMenu, GestaoClientes gerenciadorClientes,
+					HistoricoLocacoes historicoLocacoes, CatalogoFilmes catalogoFilmes, Consultas consultas,
+					ServicosLocacao servicosLocacao) {
 		this.scan = scan;
 		this.gerenciadorMenu = gerenciadorMenu;
 		this.gerenciadorClientes = gerenciadorClientes;
