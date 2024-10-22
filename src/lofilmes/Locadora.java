@@ -7,7 +7,6 @@ import lofilmes.servicos.Consultas;
 import lofilmes.servicos.GerenciadorClientes;
 import lofilmes.servicos.HistoricoLocacoes;
 import lofilmes.servicos.ServicosLocacao;
-import lofilmes.utilidades.Formatador;
 import lofilmes.utilidades.GerenciadorMenu;
 
 public class Locadora {
