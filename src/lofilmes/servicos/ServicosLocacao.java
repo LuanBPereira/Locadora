@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import lofilmes.modelos.Cliente;
 import lofilmes.modelos.Filme;
+import lofilmes.utilidades.GeradorId;
 import lofilmes.utilidades.GerenciadorEntradas;
 
 public class ServicosLocacao {
@@ -23,13 +24,14 @@ public class ServicosLocacao {
     }
 
     public void alugarFilme(CatalogoFilmes catalogo) {
+        GeradorId geradorId = new GeradorId();
         List<Filme> listaFilmes = catalogo.getListaFilmes();
         LocalDate data = LocalDate.now();
 
         // coleta de dados feita com o gerenciador de entradas
         String cpf = gerenciadorEntradas.solicitarCpf();
         String[] nomeSobrenome = gerenciadorEntradas.solicitarNomeSobrenome();
-        Long id = gerenciadorEntradas.gerarIdAleatorio();
+        Long id = geradorId.gerarIdAleatorio();
 
         // após os dados coletados, cria o cliente com a classe responsavel 
         // pelo gerenciamento do cliente

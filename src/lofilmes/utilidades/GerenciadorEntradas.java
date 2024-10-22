@@ -30,10 +30,6 @@ public class GerenciadorEntradas {
         return new String[]{nome, sobrenome};
     }
 
-    public Long gerarIdAleatorio() {
-        return new GeradorId().gerarIdAleatorio();
-    }
-    
     private String solicitarEntrada(String tipo) {
         String entrada;
         do {
