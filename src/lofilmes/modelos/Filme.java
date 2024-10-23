@@ -55,13 +55,8 @@ public class Filme {
 
 	@Override
 	public String toString() {
-		return "Título: " + getTitulo() + "\n" +
-				"Categorias: " + String.join(", ", getCategorias()) + "\n" +
-				"Diretor: " + getDiretor() + "\n" +
-				"Atores: " + String.join(", ", getAtores()) + "\n" +
-				"Data de Lançamento: " + getDataLancamento().format(Formatador.FORMATO_DATA_BR) + "\n" +
-				"Duração: " + getDuracao() + " min\n" +
-				"Preço de Locação: R$ " + String.format("%.2f", getPrecoLocacao()) + "\n";
+		return String.format("Título: %s\nCategorias: %s\nDiretor: %s\nAtores: %s\nData de lançamento: %s\nDuração: %d\nPreco de locação: R$%.2f",
+				getTitulo(),  String.join(", ", getCategorias()), getDiretor(), String.join(", ", getAtores()),
+				getDataLancamento().format(Formatador.FORMATO_DATA_BR), getDuracao(), getPrecoLocacao());
 	}
-
 }
