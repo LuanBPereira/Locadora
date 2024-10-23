@@ -50,7 +50,7 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return "Cpf: " + cpf + " | Cliente: " + getNomeCompleto();
+		return String.format("Cpf: %s\n Cliente: %s\n", cpf, getNomeCompleto());
 	}
 
 	
