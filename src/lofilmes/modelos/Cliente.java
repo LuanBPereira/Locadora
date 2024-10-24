@@ -1,8 +1,10 @@
 package lofilmes.modelos;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Cliente {
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private final Long id;
 	private final String cpf;
 	private String nome;
@@ -50,8 +52,7 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return String.format("Cpf: %s\n Cliente: %s\n", cpf, getNomeCompleto());
+		return String.format("Cpf: %s\nCliente: %s\n", cpf, getNomeCompleto());
 	}
 
-	
 }
