@@ -7,17 +7,27 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public abstract class PersistenciaBase<T> {
-
+	
+	protected String caminhoArquivoPersistencia;
+	protected String caminhoArquivoLog;
+	protected Logger logger;
+	
+	public PersistenciaBase(String caminhoArquivoPersistencia, String caminhoArquivoLog, Logger logger) {
+		this.caminhoArquivoPersistencia = caminhoArquivoPersistencia;
+		this.caminhoArquivoLog = caminhoArquivoLog;
+		this.logger = logger;
+		configurarLogger();
+		
+	}
+	
 	public abstract void adicionarEmArquivo(T objeto);
 	
-	protected static void criarLog(Logger logger, String caminhoArq) {
+    private void configurarLogger() {
         try {
-            // criando um FileHandler para salvar logs em arquivo
-            FileHandler fileHandler = new FileHandler(caminhoArq, true);
-            fileHandler.setFormatter(new SimpleFormatter());  
-            logger.addHandler(fileHandler); 
-
-            logger.setLevel(Level.ALL);  // define o nível de log (pode ser ajustado)
+            FileHandler fileHandler = new FileHandler(caminhoArquivoLog, true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            logger.setLevel(Level.ALL);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Erro ao configurar o logger", e);
         }
