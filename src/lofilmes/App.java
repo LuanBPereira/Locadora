@@ -17,15 +17,15 @@ public class App {
 		
 		// instancias dos serviços
 		GerenciadorEntradas gerenciadorEntradas = new GerenciadorEntradas(scan);
-		ControladorMenu gerenciadorMenu = new ControladorMenu(scan);
-		GestaoClientes gerenciadorClientes = new GestaoClientes();
+		ControladorMenu controladorMenu = new ControladorMenu(scan);
+		GestaoClientes gestaoClientes = new GestaoClientes();
 		HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
 		CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
 		Consultas consultas = new Consultas(scan, catalogoFilmes);
-		ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gerenciadorClientes, historicoLocacoes, gerenciadorEntradas);
+		ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gestaoClientes, historicoLocacoes, gerenciadorEntradas);
 
 		// injeções de dependencias na locadora, centalizando todos os serviços
-		Locadora locadora = new Locadora(scan, gerenciadorMenu, gerenciadorClientes, historicoLocacoes, catalogoFilmes,
+		Locadora locadora = new Locadora(scan, controladorMenu, gestaoClientes, historicoLocacoes, catalogoFilmes,
 				consultas, servicosLocacao);
 
 		locadora.executarLocadora();

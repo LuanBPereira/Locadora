@@ -12,19 +12,19 @@ import lofilmes.utilidades.ControladorMenu;
 public class Locadora {
 	
 	private final Scanner scan;
-	private final ControladorMenu gerenciadorMenu;
-	private final GestaoClientes gerenciadorClientes;
+	private final ControladorMenu controladorMenu;
+	private final GestaoClientes gestaoClientes;
 	private final HistoricoLocacoes historicoLocacoes;
 	private final CatalogoFilmes catalogoFilmes;
 	private final Consultas consultas;
 	private final ServicosLocacao servicosLocacao;
 
-	public Locadora(Scanner scan, ControladorMenu gerenciadorMenu, GestaoClientes gerenciadorClientes,
+	public Locadora(Scanner scan, ControladorMenu controladorMenu, GestaoClientes gestaoClientes,
 					HistoricoLocacoes historicoLocacoes, CatalogoFilmes catalogoFilmes, Consultas consultas,
 					ServicosLocacao servicosLocacao) {
 		this.scan = scan;
-		this.gerenciadorMenu = gerenciadorMenu;
-		this.gerenciadorClientes = gerenciadorClientes;
+		this.controladorMenu = controladorMenu;
+		this.gestaoClientes = gestaoClientes;
 		this.historicoLocacoes = historicoLocacoes;
 		this.catalogoFilmes = catalogoFilmes;
 		this.consultas = consultas;
@@ -46,7 +46,7 @@ public class Locadora {
 	}
 
 	private int exibirMenuPrincipal() {
-		return gerenciadorMenu.mostrarMenu("""
+		return controladorMenu.mostrarMenu("""
 				\n\t({[【﻿ＬｏＦｉｌｍｅｓ】]})
 				---------------
 				Seja bem vindo a LoFilmes! O que desejaria?
@@ -64,7 +64,7 @@ public class Locadora {
 		case 1 -> catalogoFilmes.listarFilmes(catalogoFilmes.getListaFilmes());
 		case 2 -> servicosLocacao.alugarFilme(catalogoFilmes);
 		case 3 -> entrarMenuDeConsultas();
-		case 4 -> gerenciadorClientes.listarClientes();
+		case 4 -> gestaoClientes.listarClientes();
 		case 5 -> System.out.println("Encerrando programa...");
 		default -> System.err.println("Opção não disponível.");
 		}
@@ -79,7 +79,7 @@ public class Locadora {
 	}
 
 	private int exibirMenuConsultas() {
-		return gerenciadorMenu.mostrarMenu("""
+		return controladorMenu.mostrarMenu("""
 				\n\t({[【﻿ＬｏＦｉｌｍｅｓ】]})
 				---------------
 				Seja bem vindo ao menu de consultas! O que desejaria?
@@ -107,7 +107,7 @@ public class Locadora {
 		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes);
 		case 7 -> consultas.consultarFilmeMaisLocado(historicoLocacoes);
 		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);
-		case 9 -> consultas.consultarClienteQueMaisLocou(historicoLocacoes, gerenciadorClientes);
+		case 9 -> consultas.consultarClienteQueMaisLocou(historicoLocacoes, gestaoClientes);
 		case 10 -> System.out.println("Retornando ao menu principal...");
 		default -> System.err.println("Opção não disponível.");
 

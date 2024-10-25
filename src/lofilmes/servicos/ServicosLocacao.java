@@ -11,14 +11,14 @@ import lofilmes.utilidades.GeradorId;
 import lofilmes.utilidades.GerenciadorEntradas;
 
 public class ServicosLocacao {
-    private GestaoClientes gerenciadorClientes;
+    private GestaoClientes gestaoClientes;
     private HistoricoLocacoes historicoLocacoes;
     private GerenciadorEntradas gerenciadorEntradas;
     private Scanner scan;
 
     public ServicosLocacao(Scanner s, GestaoClientes gc, HistoricoLocacoes hl, GerenciadorEntradas ge) {
         this.scan = s;
-        this.gerenciadorClientes = gc;
+        this.gestaoClientes = gc;
         this.historicoLocacoes = hl;
         this.gerenciadorEntradas = ge;
     }
@@ -35,7 +35,7 @@ public class ServicosLocacao {
 
         // após os dados coletados, cria o cliente com a classe responsavel 
         // pelo gerenciamento do cliente
-        Cliente cliente = gerenciadorClientes.criarCliente(id, cpf, nomeSobrenome[0], nomeSobrenome[1]);
+        Cliente cliente = gestaoClientes.criarCliente(id, cpf, nomeSobrenome[0], nomeSobrenome[1]);
 
         int opcaoFilme = getOpcaoFilme(listaFilmes);
         int diasAlugado = getDiasAlugado();

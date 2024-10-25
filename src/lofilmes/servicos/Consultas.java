@@ -118,8 +118,8 @@ public class Consultas {
 		System.out.println("Valor total das locações do último mês: R$" + valorTotalLocacoes);
 	}
 
-	public void consultarClienteQueMaisLocou(HistoricoLocacoes historico, GestaoClientes gerenciador) {
-		List<String> clienteQueMaisLocou = historico.getClienteQueMaisLocou(gerenciador);
+	public void consultarClienteQueMaisLocou(HistoricoLocacoes historico, GestaoClientes gestaoClientes) {
+		List<String> clienteQueMaisLocou = historico.getClienteQueMaisLocou(gestaoClientes);
 
 		if (clienteQueMaisLocou.size() == 1) {
 			for (String cliente : clienteQueMaisLocou) {

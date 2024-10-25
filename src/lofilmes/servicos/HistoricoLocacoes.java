@@ -85,7 +85,7 @@ public class HistoricoLocacoes {
 		return total;
 	}
 
-	public List<String> getClienteQueMaisLocou(GestaoClientes gerenciadorClientes) {
+	public List<String> getClienteQueMaisLocou(GestaoClientes gestaoClientes) {
 	    Map<Long, Integer> contagemLocacaoCliente = new HashMap<>();
 	    List<String> clienteQueMaisLocou = new ArrayList<>();
 	    int contagemMax = 0;
@@ -100,13 +100,13 @@ public class HistoricoLocacoes {
 	        if (contagemAtual > contagemMax) {
 	            contagemMax = contagemAtual;
 	            clienteQueMaisLocou.clear(); // explicação do porquê usar o clear() no metodo getFilmesMaisLocados(). (linha 49 - 56)
-	            Cliente cliente = gerenciadorClientes.getClientePorId(idCliente);
+	            Cliente cliente = gestaoClientes.getClientePorId(idCliente);
 	            if (cliente != null) {
 	                clienteQueMaisLocou.add(cliente.getNomeCompleto());
 	            }
 	         // se a contagem é igual ao máximo, apenas adicionar à lista
 	        } else if (contagemAtual == contagemMax) {
-	            Cliente cliente = gerenciadorClientes.getClientePorId(idCliente);
+	            Cliente cliente = gestaoClientes.getClientePorId(idCliente);
 	            if (cliente != null) {
 	                clienteQueMaisLocou.add(cliente.getNomeCompleto());
 	            }
