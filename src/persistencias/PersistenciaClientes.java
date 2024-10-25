@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 
 import lofilmes.modelos.Cliente;
 
-
 public class PersistenciaClientes extends PersistenciaBase<Cliente> {
 
-	private static final String CAMINHO_ARQUIVO_PERSISTENCIA = "cliente_persistence.dat";
-	private static final String CAMINHO_ARQUIVO_LOG = "cliente_persistence_log.txt";
+	private static final String CAMINHO_ARQUIVO_PERSISTENCIA = "clientes_persistence.dat";
+	private static final String CAMINHO_ARQUIVO_LOG = "clientes_persistence_log.txt";
 	private static final Logger logger = Logger.getLogger(PersistenciaClientes.class.getName());
 
 	@Override
