@@ -14,7 +14,7 @@ public class HistoricoLocacoes {
 
 	private List<DadosLocacao> historico = new ArrayList<>();
 
-	public void salvar(Long idLocacao, Cliente cliente, Filme filme, LocalDate data, double valorPago, int diasAlugado) {
+ 	public void salvar(Long idLocacao, Cliente cliente, Filme filme, LocalDate data, double valorPago, int diasAlugado) {
 		DadosLocacao dadosLocacao = new DadosLocacao(idLocacao, cliente, filme, data, valorPago, diasAlugado);
 		historico.add(dadosLocacao);
 	}
@@ -22,7 +22,7 @@ public class HistoricoLocacoes {
 	public List<DadosLocacao> getHistorico() {
 		return historico;
 	}
-
+	
 	public List<DadosLocacao> getFilmesLocadosNosUltimos7Dias() {
 		LocalDate dataAtual = LocalDate.now();
 		List<DadosLocacao> alugadosRecentes = new ArrayList<>();

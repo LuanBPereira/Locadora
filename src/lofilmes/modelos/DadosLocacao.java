@@ -8,7 +8,7 @@ public record DadosLocacao(Long idLocacao, Cliente cliente, Filme filme, LocalDa
 	
 	@Override
 	public final String toString() {
-		return String.format("DadosLocacoes [\nId locação: %d\n%s\n%s\nData: %s\nValor Pago: %.2f\nDias alugados: %d\n]", idLocacao,
-				cliente, filme, data.format(Formatador.FORMATO_DATA_BR), valorPago, diasAlugado);
+		return String.format("DadosLocacoes [\nId: %d\n%s\n%s\nData: %s\nValor Pago: %.2f\nDias alugados: %d\n]\n",
+				idLocacao, cliente, filme, data.format(Formatador.FORMATO_DATA_BR), valorPago, diasAlugado);
 	}
 }

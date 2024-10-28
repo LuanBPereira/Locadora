@@ -2,9 +2,7 @@ package lofilmes.modelos;
 
 import java.util.Objects;
 
-import lofilmes.utilidades.Identificavel;
-
-public class Cliente implements Identificavel {
+public class Cliente {
 	private final Long id;
 	private final String cpf;
 	private String nome;
@@ -17,7 +15,6 @@ public class Cliente implements Identificavel {
 		this.sobrenome = sobrenome;
 	}
 	
-	@Override
 	public Long getId() {
 		return id;
 	}

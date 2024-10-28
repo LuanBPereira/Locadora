@@ -4,9 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import lofilmes.utilidades.Formatador;
-import lofilmes.utilidades.Identificavel;
 
-public class Filme implements Identificavel{
+public class Filme {
 	private final Long id;
 	private String titulo;
 	private List<String> categorias;
@@ -28,7 +27,6 @@ public class Filme implements Identificavel{
 		this.precoLocacao = precoLocacao;
 	}
 
-	@Override
 	public Long getId() {
 		return id;
 	}

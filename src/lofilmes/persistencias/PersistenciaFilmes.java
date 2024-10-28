@@ -20,7 +20,7 @@ public class PersistenciaFilmes extends PersistenciaBase<Filme> {
 	@Override
 	public void adicionarEmArquivo(Filme filme) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivoPersistencia, true))) {
-			if(itemExiste(filme)) {
+			if (itemExiste(filme.getId())) {
 				LOGGER.warning("Filme já existe no arquivo: " + caminhoArquivoPersistencia);
 				return;
 			}

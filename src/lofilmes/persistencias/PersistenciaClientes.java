@@ -20,7 +20,7 @@ public class PersistenciaClientes extends PersistenciaBase<Cliente> {
 	@Override
 	public void adicionarEmArquivo(Cliente cliente) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivoPersistencia, true))) {
-			if (itemExiste(cliente)) {
+			if (itemExiste(cliente.getId())) {
 				LOGGER.warning("Cliente já existe no log: " + caminhoArquivoPersistencia);
 				return;
 			}
