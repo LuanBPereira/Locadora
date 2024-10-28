@@ -1,10 +1,10 @@
 package lofilmes.modelos;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Cliente implements Serializable {
-	private static final long serialVersionUID = 1L;
+import lofilmes.utilidades.Identificavel;
+
+public class Cliente implements Identificavel {
 	private final Long id;
 	private final String cpf;
 	private String nome;
@@ -17,7 +17,8 @@ public class Cliente implements Serializable {
 		this.sobrenome = sobrenome;
 	}
 	
-	public Long getID() {
+	@Override
+	public Long getId() {
 		return id;
 	}
 	
@@ -42,17 +43,17 @@ public class Cliente implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return cpf.equals(cliente.cpf);
+        return id.equals(cliente.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf);
+        return Objects.hash(id);
     }
 	
 	@Override
 	public String toString() {
-		return String.format("Cpf: %s\nCliente: %s\n", cpf, getNomeCompleto());
+		return String.format("Cliente [\nId: %d\nCpf: %s\nCliente: %s\n]\n", id, cpf, getNomeCompleto());
 	}
 
 }

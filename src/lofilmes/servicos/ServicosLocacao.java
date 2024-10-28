@@ -11,14 +11,14 @@ import lofilmes.utilidades.GeradorId;
 import lofilmes.utilidades.GerenciadorEntradas;
 
 public class ServicosLocacao {
-    private GestaoClientes gerenciadorClientes;
+    private GestaoClientes gestaoClientes;
     private HistoricoLocacoes historicoLocacoes;
     private GerenciadorEntradas gerenciadorEntradas;
     private Scanner scan;
 
     public ServicosLocacao(Scanner s, GestaoClientes gc, HistoricoLocacoes hl, GerenciadorEntradas ge) {
         this.scan = s;
-        this.gerenciadorClientes = gc;
+        this.gestaoClientes = gc;
         this.historicoLocacoes = hl;
         this.gerenciadorEntradas = ge;
     }
@@ -28,14 +28,15 @@ public class ServicosLocacao {
         List<Filme> listaFilmes = catalogo.getListaFilmes();
         LocalDate data = LocalDate.now();
 
-        // coleta de dados feita com o gerenciador de entradas
+        // coleta de dados
+        Long idLocacao = geradorId.gerarIdAleatorio();
         String cpf = gerenciadorEntradas.solicitarCpf();
         String[] nomeSobrenome = gerenciadorEntradas.solicitarNomeSobrenome();
         Long id = geradorId.gerarIdAleatorio();
 
         // após os dados coletados, cria o cliente com a classe responsavel 
         // pelo gerenciamento do cliente
-        Cliente cliente = gerenciadorClientes.criarCliente(id, cpf, nomeSobrenome[0], nomeSobrenome[1]);
+        Cliente cliente = gestaoClientes.criarCliente(id, cpf, nomeSobrenome[0], nomeSobrenome[1]);
 
         int opcaoFilme = getOpcaoFilme(listaFilmes);
         int diasAlugado = getDiasAlugado();
@@ -44,7 +45,7 @@ public class ServicosLocacao {
         System.out.println("Filme '" + filmeEscolhido.getTitulo() + "' escolhido com sucesso!");
 
         double precoTotal = getPrecoTotal(filmeEscolhido.getPrecoLocacao(), diasAlugado);
-        historicoLocacoes.salvar(cliente, precoTotal, data, filmeEscolhido, diasAlugado);
+        historicoLocacoes.salvar(idLocacao, cliente, filmeEscolhido,  data, precoTotal, diasAlugado);
         System.out.println("Aluguel realizado com sucesso! Preço total: R$ " + precoTotal);
     }
 

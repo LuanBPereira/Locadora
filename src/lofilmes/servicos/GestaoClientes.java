@@ -15,7 +15,7 @@ public class GestaoClientes {
 		}
 
 		Cliente novoCliente = new Cliente(id, cpf, nome, sobrenome);
-		listaClientes.put(novoCliente.getID(), novoCliente);
+		listaClientes.put(novoCliente.getId(), novoCliente);
 
 		System.out.println("Cliente criado com sucesso: " + novoCliente.getNomeCompleto());
 		return novoCliente;
