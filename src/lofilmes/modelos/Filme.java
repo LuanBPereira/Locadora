@@ -61,11 +61,8 @@ public class Filme {
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return String.format("Título: %s\nCategorias: %s\nDiretor: %s\nAtores: %s\nData de lançamento: %s\nDuração: %d\nPreco de locação: R$%.2f",
-=======
+
 		return String.format("Filme [\nId: %d\nTítulo: %s\nCategorias: %s\nDiretor: %s\nAtores: %s\nData de lançamento: %s\nDuração: %d\nPreco de locação: R$%.2f\n]\n", getId(),
->>>>>>> feature/persistencia
 				getTitulo(),  String.join(", ", getCategorias()), getDiretor(), String.join(", ", getAtores()),
 				getDataLancamento().format(Formatador.FORMATO_DATA_BR), getDuracao(), getPrecoLocacao());
 	}
