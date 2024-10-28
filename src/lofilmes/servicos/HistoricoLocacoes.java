@@ -14,14 +14,15 @@ public class HistoricoLocacoes {
 
 	private List<DadosLocacao> historico = new ArrayList<>();
 
-	public void salvar(Cliente cliente, double valorPago, LocalDate data, Filme filme, int diasAlugado) {
-		historico.add(new DadosLocacao(cliente, valorPago, data, filme, diasAlugado));
+ 	public void salvar(Long idLocacao, Cliente cliente, Filme filme, LocalDate data, double valorPago, int diasAlugado) {
+		DadosLocacao dadosLocacao = new DadosLocacao(idLocacao, cliente, filme, data, valorPago, diasAlugado);
+		historico.add(dadosLocacao);
 	}
 
 	public List<DadosLocacao> getHistorico() {
 		return historico;
 	}
-
+	
 	public List<DadosLocacao> getFilmesLocadosNosUltimos7Dias() {
 		LocalDate dataAtual = LocalDate.now();
 		List<DadosLocacao> alugadosRecentes = new ArrayList<>();
@@ -92,7 +93,7 @@ public class HistoricoLocacoes {
 
 	    // contagem de locações por cliente e identificação dos que mais locaram
 	    for (DadosLocacao dadosL : historico) {
-	        Long idCliente = dadosL.cliente().getID();
+	        Long idCliente = dadosL.cliente().getId();
 	        int contagemAtual = contagemLocacaoCliente.getOrDefault(idCliente, 0) + 1;
 	        contagemLocacaoCliente.put(idCliente, contagemAtual);
 	        

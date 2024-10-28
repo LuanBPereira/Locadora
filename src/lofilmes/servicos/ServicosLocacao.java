@@ -28,7 +28,8 @@ public class ServicosLocacao {
         List<Filme> listaFilmes = catalogo.getListaFilmes();
         LocalDate data = LocalDate.now();
 
-        // coleta de dados feita com o gerenciador de entradas
+        // coleta de dados
+        Long idLocacao = geradorId.gerarIdAleatorio();
         String cpf = gerenciadorEntradas.solicitarCpf();
         String[] nomeSobrenome = gerenciadorEntradas.solicitarNomeSobrenome();
         Long id = geradorId.gerarIdAleatorio();
@@ -44,7 +45,7 @@ public class ServicosLocacao {
         System.out.println("Filme '" + filmeEscolhido.getTitulo() + "' escolhido com sucesso!");
 
         double precoTotal = getPrecoTotal(filmeEscolhido.getPrecoLocacao(), diasAlugado);
-        historicoLocacoes.salvar(cliente, precoTotal, data, filmeEscolhido, diasAlugado);
+        historicoLocacoes.salvar(idLocacao, cliente, filmeEscolhido,  data, precoTotal, diasAlugado);
         System.out.println("Aluguel realizado com sucesso! Preço total: R$ " + precoTotal);
     }
 

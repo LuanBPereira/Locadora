@@ -35,10 +35,10 @@ public class GerenciadorEntradas {
         do {
             System.out.println("Digite o " + tipo + ": ");
             entrada = scan.nextLine().trim();
-            if (!entrada.matches("[a-zA-Z]+")) {
+            if (!entrada.matches("[a-zA-Z\\s]+")) {
                 System.err.println(tipo + " inválido. Use apenas letras.");
             }
-        } while (!entrada.matches("[a-zA-Z]+"));
+        } while (!entrada.matches("[a-zA-Z\\s]+"));
         return entrada;
     }
 	

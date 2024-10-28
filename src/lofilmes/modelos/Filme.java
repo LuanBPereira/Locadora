@@ -6,6 +6,7 @@ import java.util.List;
 import lofilmes.utilidades.Formatador;
 
 public class Filme {
+	private final Long id;
 	private String titulo;
 	private List<String> categorias;
 	private String diretor;
@@ -14,8 +15,9 @@ public class Filme {
 	private int duracao;
 	private double precoLocacao;
 
-	public Filme(String titulo, List<String> categorias, String diretor, List<String> atores, LocalDate dataLancamento,
+	public Filme(Long id, String titulo, List<String> categorias, String diretor, List<String> atores, LocalDate dataLancamento,
 			int duracao, double precoLocacao) {
+		this.id = id;
 		this.titulo = titulo;
 		this.categorias = categorias;
 		this.diretor = diretor;
@@ -25,6 +27,10 @@ public class Filme {
 		this.precoLocacao = precoLocacao;
 	}
 
+	public Long getId() {
+		return id;
+	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -55,7 +61,11 @@ public class Filme {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return String.format("Título: %s\nCategorias: %s\nDiretor: %s\nAtores: %s\nData de lançamento: %s\nDuração: %d\nPreco de locação: R$%.2f",
+=======
+		return String.format("Filme [\nId: %d\nTítulo: %s\nCategorias: %s\nDiretor: %s\nAtores: %s\nData de lançamento: %s\nDuração: %d\nPreco de locação: R$%.2f\n]\n", getId(),
+>>>>>>> feature/persistencia
 				getTitulo(),  String.join(", ", getCategorias()), getDiretor(), String.join(", ", getAtores()),
 				getDataLancamento().format(Formatador.FORMATO_DATA_BR), getDuracao(), getPrecoLocacao());
 	}

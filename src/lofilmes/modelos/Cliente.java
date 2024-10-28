@@ -15,7 +15,7 @@ public class Cliente {
 		this.sobrenome = sobrenome;
 	}
 	
-	public Long getID() {
+	public Long getId() {
 		return id;
 	}
 	
@@ -40,18 +40,21 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return cpf.equals(cliente.cpf);
+        return id.equals(cliente.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf);
+        return Objects.hash(id);
     }
 	
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return String.format("Cpf: %s\n Cliente: %s\n", cpf, getNomeCompleto());
+=======
+		return String.format("Cliente [\nId: %d\nCpf: %s\nCliente: %s\n]\n", id, cpf, getNomeCompleto());
+>>>>>>> feature/persistencia
 	}
 
-	
 }
