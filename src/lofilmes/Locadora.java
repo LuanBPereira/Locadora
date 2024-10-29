@@ -1,7 +1,5 @@
 package lofilmes;
 
-import java.util.Scanner;
-
 import lofilmes.servicos.CatalogoFilmes;
 import lofilmes.servicos.Consultas;
 import lofilmes.servicos.GestaoClientes;
@@ -11,7 +9,6 @@ import lofilmes.utilidades.ControladorMenu;
 
 public class Locadora {
 	
-	private final Scanner scan;
 	private final ControladorMenu controladorMenu;
 	private final GestaoClientes gestaoClientes;
 	private final HistoricoLocacoes historicoLocacoes;
@@ -19,10 +16,9 @@ public class Locadora {
 	private final Consultas consultas;
 	private final ServicosLocacao servicosLocacao;
 
-	public Locadora(Scanner scan, ControladorMenu controladorMenu, GestaoClientes gestaoClientes,
+	public Locadora(ControladorMenu controladorMenu, GestaoClientes gestaoClientes,
 					HistoricoLocacoes historicoLocacoes, CatalogoFilmes catalogoFilmes, Consultas consultas,
 					ServicosLocacao servicosLocacao) {
-		this.scan = scan;
 		this.controladorMenu = controladorMenu;
 		this.gestaoClientes = gestaoClientes;
 		this.historicoLocacoes = historicoLocacoes;
@@ -42,7 +38,6 @@ public class Locadora {
 			escolha = exibirMenuPrincipal();
 			executarEscolhaPrincipal(escolha);
 		} while (escolha != 5);
-		scan.close();
 	}
 
 	private int exibirMenuPrincipal() {

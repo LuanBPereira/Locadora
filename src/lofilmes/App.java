@@ -25,7 +25,7 @@ public class App {
 		ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gestaoClientes, historicoLocacoes, gerenciadorEntradas);
 
 		// injeções de dependencias na locadora, centalizando todos os serviços
-		Locadora locadora = new Locadora(scan, controladorMenu, gestaoClientes, historicoLocacoes, catalogoFilmes,
+		Locadora locadora = new Locadora(controladorMenu, gestaoClientes, historicoLocacoes, catalogoFilmes,
 				consultas, servicosLocacao);
 
 		locadora.executarLocadora();
