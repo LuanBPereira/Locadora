@@ -3,7 +3,6 @@ package lofilmes;
 import lofilmes.servicos.CatalogoFilmes;
 import lofilmes.servicos.Consultas;
 import lofilmes.servicos.GestaoClientes;
-import lofilmes.servicos.HistoricoLocacoes;
 import lofilmes.servicos.ServicosLocacao;
 import lofilmes.utilidades.ControladorMenu;
 
@@ -11,17 +10,14 @@ public class Locadora {
 	
 	private final ControladorMenu controladorMenu;
 	private final GestaoClientes gestaoClientes;
-	private final HistoricoLocacoes historicoLocacoes;
 	private final CatalogoFilmes catalogoFilmes;
 	private final Consultas consultas;
 	private final ServicosLocacao servicosLocacao;
 
 	public Locadora(ControladorMenu controladorMenu, GestaoClientes gestaoClientes,
-					HistoricoLocacoes historicoLocacoes, CatalogoFilmes catalogoFilmes, Consultas consultas,
-					ServicosLocacao servicosLocacao) {
+			CatalogoFilmes catalogoFilmes, Consultas consultas, ServicosLocacao servicosLocacao) {
 		this.controladorMenu = controladorMenu;
 		this.gestaoClientes = gestaoClientes;
-		this.historicoLocacoes = historicoLocacoes;
 		this.catalogoFilmes = catalogoFilmes;
 		this.consultas = consultas;
 		this.servicosLocacao = servicosLocacao;
@@ -98,11 +94,11 @@ public class Locadora {
 		case 2 -> consultas.consultarFilmePorDiretor();
 		case 3 -> consultas.consultarFilmePorCategoria();
 		case 4 -> consultas.consultarFilmePorPreco();
-		case 5 -> consultas.consultarHistorico(historicoLocacoes);
-		case 6 -> consultas.consultarFilmesLocados7Dias(historicoLocacoes);
-		case 7 -> consultas.consultarFilmeMaisLocado(historicoLocacoes);
-		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes(historicoLocacoes);
-		case 9 -> consultas.consultarClienteQueMaisLocou(historicoLocacoes, gestaoClientes);
+		case 5 -> consultas.consultarHistorico();
+		case 6 -> consultas.consultarFilmesLocados7Dias();
+		case 7 -> consultas.consultarFilmeMaisLocado();
+		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes();
+		case 9 -> consultas.consultarClienteQueMaisLocou(gestaoClientes);
 		case 10 -> System.out.println("Retornando ao menu principal...");
 		default -> System.err.println("Opção não disponível.");
 

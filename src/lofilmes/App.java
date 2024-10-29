@@ -21,11 +21,11 @@ public class App {
 		GestaoClientes gestaoClientes = new GestaoClientes();
 		HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
 		CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
-		Consultas consultas = new Consultas(scan, catalogoFilmes);
+		Consultas consultas = new Consultas(scan, catalogoFilmes, historicoLocacoes);
 		ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gestaoClientes, historicoLocacoes, gerenciadorEntradas);
 
 		// injeções de dependencias na locadora, centalizando todos os serviços
-		Locadora locadora = new Locadora(controladorMenu, gestaoClientes, historicoLocacoes, catalogoFilmes,
+		Locadora locadora = new Locadora(controladorMenu, gestaoClientes, catalogoFilmes,
 				consultas, servicosLocacao);
 
 		locadora.executarLocadora();

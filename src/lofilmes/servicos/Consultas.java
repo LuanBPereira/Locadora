@@ -12,10 +12,12 @@ public class Consultas {
 
 	private Scanner scan;
 	private CatalogoFilmes catalogoFilmes;
+	private HistoricoLocacoes historico;
 	
-	public Consultas(Scanner scan, CatalogoFilmes catalogoFilmes) {
+	public Consultas(Scanner scan, CatalogoFilmes catalogoFilmes, HistoricoLocacoes historico) {
 		this.scan = scan;
 		this.catalogoFilmes = catalogoFilmes;
+		this.historico = historico;
 	}
 
 	public void consultarFilmePorTitulo() {
@@ -97,7 +99,7 @@ public class Consultas {
 		}
 	}
 
-	public void consultarFilmesLocados7Dias(HistoricoLocacoes historico) {
+	public void consultarFilmesLocados7Dias() {
 		List<DadosLocacao> listaHistorico = historico.getFilmesLocadosNosUltimos7Dias();
 		System.out.println("Filmes locados nos últimos 7 dias: \n");
 
@@ -106,19 +108,19 @@ public class Consultas {
 		}
 	}
 
-	public void consultarFilmeMaisLocado(HistoricoLocacoes historico) {
+	public void consultarFilmeMaisLocado() {
 		List<String> filmesMaisLocados = historico.getFilmesMaisLocados();
 		System.out.println("Filmes mais locados: \n");
 		for (String filmes : filmesMaisLocados)
 			System.out.println("Filme: " + filmes);
 	}
 
-	public void consultarValorTotalLocacoesUltimoMes(HistoricoLocacoes historico) {
+	public void consultarValorTotalLocacoesUltimoMes() {
 		double valorTotalLocacoes = historico.getValorTotalLocacoesUltimoMes();
 		System.out.println("Valor total das locações do último mês: R$" + valorTotalLocacoes);
 	}
 
-	public void consultarClienteQueMaisLocou(HistoricoLocacoes historico, GestaoClientes gestaoClientes) {
+	public void consultarClienteQueMaisLocou(GestaoClientes gestaoClientes) {
 		List<String> clienteQueMaisLocou = historico.getClienteQueMaisLocou(gestaoClientes);
 
 		if (clienteQueMaisLocou.size() == 1) {
@@ -133,7 +135,7 @@ public class Consultas {
 		}
 	}
 
-	public void consultarHistorico(HistoricoLocacoes historico) {
+	public void consultarHistorico() {
 		List<DadosLocacao> listaHistorico = historico.getHistorico();
 
 		if (listaHistorico.isEmpty())
