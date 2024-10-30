@@ -9,14 +9,18 @@ import java.util.Map;
 import lofilmes.modelos.Cliente;
 import lofilmes.modelos.DadosLocacao;
 import lofilmes.modelos.Filme;
+import lofilmes.persistencias.PersistenciaHistoricoLocacoes;
+import lofilmes.utilidades.ManipuladorArquivos;
 
 public class HistoricoLocacoes {
 
 	private List<DadosLocacao> historico = new ArrayList<>();
+	private PersistenciaHistoricoLocacoes persistencia = new PersistenciaHistoricoLocacoes();
 
  	public void salvar(Long idLocacao, Cliente cliente, Filme filme, LocalDate data, double valorPago, int diasAlugado) {
 		DadosLocacao dadosLocacao = new DadosLocacao(idLocacao, cliente, filme, data, valorPago, diasAlugado);
 		historico.add(dadosLocacao);
+		persistencia.adicionarEmArquivo(dadosLocacao);
 	}
 
 	public List<DadosLocacao> getHistorico() {
@@ -71,7 +75,6 @@ public class HistoricoLocacoes {
 	    return filmesMaisLocados;
 	}
 
-
 	public double getValorTotalLocacoesUltimoMes() {
 		LocalDate dataAtual = LocalDate.now();
 		double total = 0.0;
@@ -117,5 +120,16 @@ public class HistoricoLocacoes {
 	    return clienteQueMaisLocou;
 	}
 
+	public void exibirArquivoPersistencia() {
+		final String caminhoArquivo = "historicoLocacoes_persistence.txt";
+		
+		ManipuladorArquivos.lerArquivo(caminhoArquivo);
+	}
 	
+	
+	public static void main(String[] args) {
+		HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
+		
+		historicoLocacoes.exibirArquivoPersistencia();
+	}
 }
