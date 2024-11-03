@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import lofilmes.utilidades.ManipuladorArquivos;
+
 public abstract class PersistenciaBase<T> {
 
 	protected String caminhoArquivoPersistencia;
@@ -49,7 +51,11 @@ public abstract class PersistenciaBase<T> {
         return false; // não existe item no arquivo
     }
 
-	public void finalizarLogger() {
+	public void exibirArquivoPersistencia(String caminhoArquivo) {	
+		ManipuladorArquivos.lerArquivo(caminhoArquivo);
+	}
+	
+ 	public void finalizarLogger() {
 	    for (Handler handler : logger.getHandlers()) {
 	        handler.close();
 	        logger.removeHandler(handler);

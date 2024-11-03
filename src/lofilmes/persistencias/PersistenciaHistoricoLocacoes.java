@@ -20,7 +20,7 @@ public class PersistenciaHistoricoLocacoes extends PersistenciaBase<DadosLocacao
 	@Override
 	public void adicionarEmArquivo(DadosLocacao dadosLocacao) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivoPersistencia, true))) {
-			if(itemExiste(dadosLocacao.idLocacao())) {
+			if (itemExiste(dadosLocacao.idLocacao())) {
 				LOGGER.info("Locação já existente no arquivo: " + caminhoArquivoPersistencia);
 				return;
 			}

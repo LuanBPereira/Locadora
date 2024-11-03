@@ -13,11 +13,13 @@ public class Consultas {
 	private Scanner scan;
 	private CatalogoFilmes catalogoFilmes;
 	private HistoricoLocacoes historico;
+	private GestaoClientes gestaoClientes;
 	
-	public Consultas(Scanner scan, CatalogoFilmes catalogoFilmes, HistoricoLocacoes historico) {
+ 	public Consultas(Scanner scan, CatalogoFilmes catalogoFilmes, HistoricoLocacoes historico, GestaoClientes gestaoClientes) {
 		this.scan = scan;
 		this.catalogoFilmes = catalogoFilmes;
 		this.historico = historico;
+		this.gestaoClientes = gestaoClientes;
 	}
 
 	public void consultarFilmePorTitulo() {
@@ -120,7 +122,7 @@ public class Consultas {
 		System.out.println("Valor total das locações do último mês: R$" + valorTotalLocacoes);
 	}
 
-	public void consultarClienteQueMaisLocou(GestaoClientes gestaoClientes) {
+	public void consultarClienteQueMaisLocou() {
 		List<String> clienteQueMaisLocou = historico.getClienteQueMaisLocou(gestaoClientes);
 
 		if (clienteQueMaisLocou.size() == 1) {
@@ -155,4 +157,12 @@ public class Consultas {
 		}
 	}
 
+	public void consultarPersistenciaCliente() {
+		gestaoClientes.exibirArquivoPersistencia();
+	}
+	
+	public void consultarPersistenciaHistoricoLocacoes() {
+		historico.exibirArquivoPersistencia();
+	}
+	
 }

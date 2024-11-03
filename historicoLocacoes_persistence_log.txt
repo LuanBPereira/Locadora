@@ -1,0 +1,26 @@
+Nov 03, 2024 4:41:18 PM lofilmes.persistencias.PersistenciaHistoricoLocacoes adicionarEmArquivo
+INFO: Dados da locação salvo com sucesso!
+DadosLocacoes [
+Id: 79276
+Cliente [
+Id: 88101
+Cpf: 12345678910
+Cliente: Luan Barufi Pereira
+]
+
+Filme [
+Id: 2
+Título: O Poderoso Chefão
+Categorias: Crime, Drama
+Diretor: Francis Ford Coppola
+Atores: Marlon Brando, Al Pacino
+Data de lançamento: 24/03/1972
+Duração: 175
+Preco de locação: R$12.50
+]
+
+Data: 03/11/2024
+Valor Pago: 12.50
+Dias alugados: 1
+]
+

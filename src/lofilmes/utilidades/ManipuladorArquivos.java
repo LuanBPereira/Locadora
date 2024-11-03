@@ -4,20 +4,26 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManipuladorArquivos {
 
 	public static void lerArquivo(String caminhoArquivo) {
 
-		try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {			
-			String linha = br.readLine();
+		try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {		
 			
-			if (linha == null)
+			List<String> linhas = br.lines()
+		            .filter(linha -> !linha.trim().isEmpty()) // filtra linhas vazias. Se não tiver vazia, pega a linha.
+		            .collect(Collectors.toList());
 
-			while ((linha = br.readLine()) != null) {
-				System.out.println(linha);
-			}
-
+			if (linhas.isEmpty()) {
+	            System.out.println("Arquivo vazio.");
+	            return;
+	        }
+			
+			linhas.forEach(System.out::println);
+			
 		} catch (FileNotFoundException e) {
 			System.err.println("Não foi possível encontrar o arquivo: " + caminhoArquivo);
 
@@ -25,10 +31,6 @@ public class ManipuladorArquivos {
 			System.err.println("Erro: " + e.getMessage());
 
 		}
-	}
-
-	public void escreverArquivo() {
-
 	}
 
 }

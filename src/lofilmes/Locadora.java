@@ -46,7 +46,7 @@ public class Locadora {
 				2 - Alugar filme
 				3 - Consultas
 				4 - Listar clientes
-				5 - Encerrar programa
+				5 - Encerrar programa 
 				""");
 	}
 
@@ -66,7 +66,7 @@ public class Locadora {
 		do {
 			escolha = exibirMenuConsultas();
 			executarEscolhaConsultas(escolha);
-		} while (escolha != 10);
+		} while (escolha != 12);
 	}
 
 	private int exibirMenuConsultas() {
@@ -84,7 +84,9 @@ public class Locadora {
 				7 - Consulta filmes mais locados
 				8 - Consulta valor total das locações no último mês
 				9 - Consulta cliente que mais locou filmes
-				10 - Retornar ao menu principal
+				10 - Consulta arquivo persistencia cliente
+				11 - Consulta arquivo persistencia histórico locações
+				12 - Retornar ao menu principal
 				""");
 	}
 
@@ -98,8 +100,10 @@ public class Locadora {
 		case 6 -> consultas.consultarFilmesLocados7Dias();
 		case 7 -> consultas.consultarFilmeMaisLocado();
 		case 8 -> consultas.consultarValorTotalLocacoesUltimoMes();
-		case 9 -> consultas.consultarClienteQueMaisLocou(gestaoClientes);
-		case 10 -> System.out.println("Retornando ao menu principal...");
+		case 9 -> consultas.consultarClienteQueMaisLocou();
+		case 10 -> consultas.consultarPersistenciaCliente();
+		case 11 -> consultas.consultarPersistenciaHistoricoLocacoes();
+		case 12 -> System.out.println("Retornando ao menu principal...");
 		default -> System.err.println("Opção não disponível.");
 
 		}

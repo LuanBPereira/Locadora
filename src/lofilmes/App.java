@@ -21,7 +21,7 @@ public class App {
 		GestaoClientes gestaoClientes = new GestaoClientes();
 		HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
 		CatalogoFilmes catalogoFilmes = new CatalogoFilmes();
-		Consultas consultas = new Consultas(scan, catalogoFilmes, historicoLocacoes);
+		Consultas consultas = new Consultas(scan, catalogoFilmes, historicoLocacoes, gestaoClientes);
 		ServicosLocacao servicosLocacao = new ServicosLocacao(scan, gestaoClientes, historicoLocacoes, gerenciadorEntradas);
 
 		// injeções de dependencias na locadora, centalizando todos os serviços

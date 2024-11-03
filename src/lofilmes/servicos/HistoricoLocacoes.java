@@ -10,7 +10,6 @@ import lofilmes.modelos.Cliente;
 import lofilmes.modelos.DadosLocacao;
 import lofilmes.modelos.Filme;
 import lofilmes.persistencias.PersistenciaHistoricoLocacoes;
-import lofilmes.utilidades.ManipuladorArquivos;
 
 public class HistoricoLocacoes {
 
@@ -19,8 +18,7 @@ public class HistoricoLocacoes {
 
  	public void salvar(Long idLocacao, Cliente cliente, Filme filme, LocalDate data, double valorPago, int diasAlugado) {
 		DadosLocacao dadosLocacao = new DadosLocacao(idLocacao, cliente, filme, data, valorPago, diasAlugado);
-		historico.add(dadosLocacao);
-		persistencia.adicionarEmArquivo(dadosLocacao);
+		salvarHistorico(dadosLocacao);
 	}
 
 	public List<DadosLocacao> getHistorico() {
@@ -103,7 +101,7 @@ public class HistoricoLocacoes {
 	        // se encontramos um novo máximo, limpamos a lista e adicionamos o cliente
 	        if (contagemAtual > contagemMax) {
 	            contagemMax = contagemAtual;
-	            clienteQueMaisLocou.clear(); // explicação do porquê usar o clear() no metodo getFilmesMaisLocados(). (linha 49 - 56)
+	            clienteQueMaisLocou.clear(); // explicação do porquê usar o clear() no metodo getFilmesMaisLocados(). (linha 52 - 59)
 	            Cliente cliente = gestaoClientes.getClientePorId(idCliente);
 	            if (cliente != null) {
 	                clienteQueMaisLocou.add(cliente.getNomeCompleto());
@@ -121,15 +119,13 @@ public class HistoricoLocacoes {
 	}
 
 	public void exibirArquivoPersistencia() {
-		final String caminhoArquivo = "historicoLocacoes_persistence.txt";
-		
-		ManipuladorArquivos.lerArquivo(caminhoArquivo);
+		String caminhoArquivo = "historicoLocacoes_persistence.txt";
+		persistencia.exibirArquivoPersistencia(caminhoArquivo);
 	}
-	
-	
-	public static void main(String[] args) {
-		HistoricoLocacoes historicoLocacoes = new HistoricoLocacoes();
-		
-		historicoLocacoes.exibirArquivoPersistencia();
+
+	private void salvarHistorico(DadosLocacao dadosLocacao) {
+		historico.add(dadosLocacao);
+		persistencia.adicionarEmArquivo(dadosLocacao);
 	}
+
 }

@@ -1,11 +1,14 @@
 package lofilmes.servicos;
 
 import lofilmes.modelos.Cliente;
+import lofilmes.persistencias.PersistenciaClientes;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class GestaoClientes {
 	private Map<Long, Cliente> listaClientes = new HashMap<>();
+	private PersistenciaClientes persistencia = new PersistenciaClientes();
 
 	public Cliente criarCliente(Long id, String cpf, String nome, String sobrenome) {
 		Cliente clienteExistente = getClientePorCpf(cpf);
@@ -15,19 +18,10 @@ public class GestaoClientes {
 		}
 
 		Cliente novoCliente = new Cliente(id, cpf, nome, sobrenome);
-		listaClientes.put(novoCliente.getId(), novoCliente);
+		salvarCliente(novoCliente);
 
 		System.out.println("Cliente criado com sucesso: " + novoCliente.getNomeCompleto());
 		return novoCliente;
-	}
-
-	private Cliente getClientePorCpf(String cpf) {
-		for (Cliente cliente : listaClientes.values()) {
-			if (cliente.getCPF().equals(cpf)) {
-				return cliente;
-			}
-		}
-		return null;
 	}
 
 	public Cliente getClientePorId(Long id) {
@@ -44,5 +38,24 @@ public class GestaoClientes {
 		}
 		
 	}
-
+	
+	public void exibirArquivoPersistencia() {
+		String caminhoArquivo = "clientes_persistence.txt";
+		persistencia.exibirArquivoPersistencia(caminhoArquivo);
+	}
+	
+	private void salvarCliente(Cliente cliente) {
+		listaClientes.put(cliente.getId(), cliente);
+		persistencia.adicionarEmArquivo(cliente);
+	}
+	
+	private Cliente getClientePorCpf(String cpf) {
+		for (Cliente cliente : listaClientes.values()) {
+			if (cliente.getCPF().equals(cpf)) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+	
 }
