@@ -8,7 +8,11 @@ import java.util.Map;
 
 public class GestaoClientes {
 	private Map<Long, Cliente> listaClientes = new HashMap<>();
-	private PersistenciaClientes persistencia = new PersistenciaClientes();
+	private PersistenciaClientes persistencia;
+	
+	public GestaoClientes(PersistenciaClientes persistencia) {
+		this.persistencia = persistencia;
+	}
 
 	public Cliente criarCliente(Long id, String cpf, String nome, String sobrenome) {
 		Cliente clienteExistente = getClientePorCpf(cpf);
@@ -42,6 +46,10 @@ public class GestaoClientes {
 	public void exibirArquivoPersistencia() {
 		String caminhoArquivo = "clientes_persistence.txt";
 		persistencia.exibirArquivoPersistencia(caminhoArquivo);
+	}
+
+	public void finalizarLogger() {
+		persistencia.finalizarLogger();
 	}
 	
 	private void salvarCliente(Cliente cliente) {

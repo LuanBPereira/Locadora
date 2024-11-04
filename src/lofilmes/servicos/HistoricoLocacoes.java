@@ -14,8 +14,12 @@ import lofilmes.persistencias.PersistenciaHistoricoLocacoes;
 public class HistoricoLocacoes {
 
 	private List<DadosLocacao> historico = new ArrayList<>();
-	private PersistenciaHistoricoLocacoes persistencia = new PersistenciaHistoricoLocacoes();
+	private PersistenciaHistoricoLocacoes persistencia;
 
+	public HistoricoLocacoes(PersistenciaHistoricoLocacoes persistencia) {
+		this.persistencia = persistencia;
+	}
+	
  	public void salvar(Long idLocacao, Cliente cliente, Filme filme, LocalDate data, double valorPago, int diasAlugado) {
 		DadosLocacao dadosLocacao = new DadosLocacao(idLocacao, cliente, filme, data, valorPago, diasAlugado);
 		salvarHistorico(dadosLocacao);
@@ -123,6 +127,10 @@ public class HistoricoLocacoes {
 		persistencia.exibirArquivoPersistencia(caminhoArquivo);
 	}
 
+	public void finalizarLogger() {
+		persistencia.finalizarLogger();
+	}
+	
 	private void salvarHistorico(DadosLocacao dadosLocacao) {
 		historico.add(dadosLocacao);
 		persistencia.adicionarEmArquivo(dadosLocacao);
