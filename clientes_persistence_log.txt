@@ -1,8 +1,0 @@
-Nov 03, 2024 4:41:08 PM lofilmes.persistencias.PersistenciaClientes adicionarEmArquivo
-INFO: Cliente salvo com sucesso!
-Cliente [
-Id: 88101
-Cpf: 12345678910
-Cliente: Luan Barufi Pereira
-]
-
